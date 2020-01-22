@@ -1,0 +1,40 @@
+{
+	"name": "basic",
+	"version": "1.0.0",
+	"description": "Basic Algorithms and Data Structures",
+	"main": "index.ts",
+	"license": "MIT",
+	"dependencies": {},
+	"scripts": {
+		"lint": "eslint src --ext .js,.jsx,.ts,.tsx",
+		"test": "cross-env TS_NODE_FILES=true mocha --exit --require ts-node/register --colors test/**/*.ts",
+		"coverage": "nyc yarn run test"
+	},
+	"files": [
+		"index.ts",
+		"src"
+	],
+	"devDependencies": {
+		"@types/chai": "^4.2.7",
+		"@types/mocha": "^5.2.7",
+		"@types/node": "^13.1.8",
+		"@typescript-eslint/eslint-plugin": "^2.17.0",
+		"@typescript-eslint/parser": "^2.17.0",
+		"chai": "^4.2.0",
+		"cross-env": "^6.0.3",
+		"eslint": "^6.8.0",
+		"eslint-config-airbnb": "^18.0.1",
+		"eslint-config-prettier": "^6.9.0",
+		"eslint-import-resolver-typescript": "^2.0.0",
+		"eslint-plugin-import": "^2.20.0",
+		"eslint-plugin-json": "^2.0.1",
+		"eslint-plugin-jsx-a11y": "^6.2.3",
+		"eslint-plugin-prettier": "^3.1.2",
+		"eslint-plugin-react": "^7.18.0",
+		"mocha": "^7.0.0",
+		"nyc": "^15.0.0",
+		"prettier": "^1.19.1",
+		"ts-node": "^8.6.2",
+		"typescript": "^3.7.5"
+	}
+}
