@@ -1,11 +1,22 @@
-import { Sortable, Comparable,compare } from '../comparable/Comparable';
+/**
+ *
+ */
+import { Sortable, Comparable, compare } from '../comparable/Comparable';
 
+/**
+ * Time Complexity O(n) since need to loop n times to fill the array of size n;
+ * Space Complexity O(n) since need to merge two arrays of size n/2 to fill the array of size n.
+ * @param list
+ * @param start
+ * @param divide
+ * @param end
+ */
 function merge(list: Sortable[], start: number, divide: number, end: number): void{
   const left: Sortable[] = [];
   const right: Sortable[] = [];
 
-  for (let i = start; i < divide; i++) left[i - start] = list[i];
-  for (let i = divide; i < end; i++) right[i - divide] = list[i];
+  for (let i = start; i < divide; i+=1) left[i - start] = list[i];
+  for (let i = divide; i < end; i+=1) right[i - divide] = list[i];
 
   let l = 0; let r = 0; let
     i = start;
@@ -32,7 +43,13 @@ function merge(list: Sortable[], start: number, divide: number, end: number): vo
     r += 1;
   }
 }
-
+/**
+ * T(n)=2*T(n/2)+O(n). By master theorem, O(n)=n^log2=O(n)=> Time Complexity O(nlgn)
+ * Space Complexity will be: O(n)+O(lgn)=O(n)
+ * @param list
+ * @param start
+ * @param end
+ */
 function mergeSortRecurse(list: Sortable[], start: number, end: number): void{
   if (end - start > 1) {
     const divide = Math.floor((start + end) / 2);
