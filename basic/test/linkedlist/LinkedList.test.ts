@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import {LinkedList} from '../../src/linkedlist/LinkedList';
+import LinkedList from '../../src/linkedlist/LinkedList';
 
 describe('LinkedList', () => {
     it('should size increase and change head after add element', () => {

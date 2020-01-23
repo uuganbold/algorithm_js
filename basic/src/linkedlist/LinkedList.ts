@@ -1,8 +1,9 @@
 /**
- * 
+ *
  */
 class LinkedListNode<T> {
   public data: T;
+
   public next: LinkedListNode<T>;
 
   constructor(data: T) {
@@ -11,13 +12,14 @@ class LinkedListNode<T> {
   }
 }
 
-export class LinkedList<T> {
+export default class LinkedList<T> {
   private head: LinkedListNode<T>;
-  private size:number;
+
+  private size: number;
 
   constructor() {
     this.head = null;
-    this.size=0;
+    this.size = 0;
   }
 
   /**
@@ -28,7 +30,7 @@ export class LinkedList<T> {
     const node = new LinkedListNode(data);
     node.next = this.head;
     this.head = node;
-    this.size=this.size+1;
+    this.size += 1;
   }
 
   /**
@@ -36,113 +38,116 @@ export class LinkedList<T> {
    * @param index index where new node to be added
    * @param data  data belonging to the new node.
    */
-  public addAt(index:number,data:T){
-      if(index<0||index>this.size){
-         throw new RangeError('The member cannot be added at out of the size');
+  public addAt(index: number, data: T): void {
+    if (index < 0 || index > this.size) {
+      throw new RangeError('The member cannot be added at out of the size');
+    }
+
+    const newNode = new LinkedListNode(data);
+    if (index === 0) {
+      newNode.next = this.head;
+      this.head = newNode;
+    } else {
+      let i = index;
+      let node = this.head;
+      while (i > 1) {
+        node = node.next;
+        i -= 1;
       }
-      
-      const newNode=new LinkedListNode(data);
-      if(index==0) {
-        newNode.next=this.head;
-        this.head=newNode;
-      }else{
-          let node=this.head;
-          while(index>1){
-            node=node.next;
-            index=index-1;
-          }
-          newNode.next=node.next;
-          node.next=newNode;
-      }
-      this.size=this.size+1;
+      newNode.next = node.next;
+      node.next = newNode;
+    }
+    this.size += 1;
   }
 
   /**
    * Time complexity O(1)
    */
-  public clear(){
-      this.head=null;
+  public clear(): void{
+    this.head = null;
   }
 
   /**
    * Time complexity O(n)
-   * @param data 
+   * @param data
    */
-  public contains(data:T):boolean{
-    let node=this.head;
-    while(node!=null&&node.data!=data){
-      node=node.next;
+  public contains(data: T): boolean {
+    let node = this.head;
+    while (node != null && node.data !== data) {
+      node = node.next;
     }
-    return node!=null;
+    return node != null;
   }
 
   /**
    * Time complexity O(1)
    */
-  public isEmpty():boolean{
-    return this.size==0;
+  public isEmpty(): boolean {
+    return this.size === 0;
   }
 
-  public getSize():number{
-      return this.size;
+  public getSize(): number {
+    return this.size;
   }
 
   /**
    * Time complexity O(n)
-   * @param data 
+   * @param data
    */
-  public remove(data:T):boolean{
-    let node=this.head;
-    let parent=null;
-    while(node!=null&&node.data!=data){
-        parent=node;
-        node=node.next;
+  public remove(data: T): boolean {
+    let node = this.head;
+    let parent = null;
+    while (node != null && node.data !== data) {
+      parent = node;
+      node = node.next;
     }
-    if(node==null) return false;
-    if(parent!=null) parent.next=node.next;
-    else this.head=node.next;
-    this.size=this.size-1;
+    if (node == null) return false;
+    if (parent != null) parent.next = node.next;
+    else this.head = node.next;
+    this.size -= 1;
     return true;
   }
 
-  public removeAt(index:number):boolean{
-    if(index<0||index>=this.size) return false;
-    let node=this.head;
-    let parent=null;
-    while(index>0){
-        parent=node;
-        node=node.next;
-        index=index-1;
+  public removeAt(index: number): boolean {
+    if (index < 0 || index >= this.size) return false;
+    let node = this.head;
+    let parent = null;
+    let i = index;
+    while (i > 0) {
+      parent = node;
+      node = node.next;
+      i -= 1;
     }
-    if(parent!=null) parent.next=node.next;
-    else this.head=node.next;
-    this.size=this.size-1;
+    if (parent != null) parent.next = node.next;
+    else this.head = node.next;
+    this.size -= 1;
     return true;
   }
 
-  public get(index:number):T{
-      let node=this.head;
-      while(node!=null&&index>0){
-        node=node.next;
-        index=index-1;
-      }
-      if(node==null) return null;
-      else return node.data;
+  public get(index: number): T {
+    let node = this.head;
+    let i = index;
+    while (node != null && i > 0) {
+      node = node.next;
+      i -= 1;
+    }
+    if (node == null) return null;
+    return node.data;
   }
 
   public peek(): T {
-    if(this.head==null) return null;
-    else return this.head.data;
+    if (this.head == null) return null;
+    return this.head.data;
   }
 
-  public toString():string{
-     let result="[";
-     let node=this.head;
-     while(node!=null){
-        result+=node.data+"->";
-        node=node.next;
-     }
-     result+="]";
-     return result;
+  public toString(): string {
+    let result = '[';
+    let node = this.head;
+    while (node != null) {
+      result += `${node.data}->`;
+      node = node.next;
+    }
+    result += ']';
+    return result;
   }
 }
