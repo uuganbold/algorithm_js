@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import mergeSort from '../../src/sorting/MergeSort';
+import quickSort from '../../src/sorting/QuickSort';
 import {Comparable} from '../../src/comparable/Comparable';
 
 class DecreaseNumber implements Comparable{
@@ -16,25 +16,25 @@ class DecreaseNumber implements Comparable{
     }
 } 
 
-describe('MergeSort',()=>{
+describe('QuickSort',()=>{
 
     it('should sort already sorted array',()=>{
         const a=[1,2,3,4,5,6];
-        mergeSort(a);
+        quickSort(a);
 
         expect(a).to.deep.equal([1,2,3,4,5,6]);
     });
     
     it('should sort descendent sorted array',()=>{
         const a=[6,5,4,3,2,1];
-        mergeSort(a);
+        quickSort(a);
 
         expect(a).to.deep.equal([1,2,3,4,5,6]);
     });
-
+    
     it('should sort a number array',()=>{
         const a=[4,20,50,10,33,10];
-        mergeSort(a);
+        quickSort(a);
 
         const b=[4,10,10,20,33,50];
 
@@ -44,7 +44,7 @@ describe('MergeSort',()=>{
 
     it('should sort a string array',()=>{
         const a=['committee','update','free','bilingual','programs'];
-        mergeSort(a);
+        quickSort(a);
 
         expect(a).to.deep.equal(['bilingual','committee','free','programs','update']);
     })
@@ -56,20 +56,20 @@ describe('MergeSort',()=>{
         const ten=new DecreaseNumber(10);
         const thirty=new DecreaseNumber(33);
 
-        const a=[four,twenty,fifty,ten,thirty];
+        const a=[twenty,four,fifty,ten,thirty];
 
-        mergeSort(a);
+        quickSort(a);
 
         expect(a).to.deep.equal([fifty,thirty,twenty,ten,four]);
     })
 
     it('should return null if it receives null array',()=>{
-        expect(()=>mergeSort(null)).to.not.throw();
+        expect(()=>quickSort(null)).to.not.throw();
     })
 
     it('should be return empty array if it is empty',()=>{
         const a:number[]=[];
-        mergeSort(a);
+        quickSort(a);
         expect(a).to.be.empty
     });
 })

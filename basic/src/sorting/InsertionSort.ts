@@ -6,9 +6,9 @@ import { Sortable, compare } from '../comparable/Comparable';
  * Space Complexity O(1)
  * @param a
  */
-export default function insertionSort(a: Sortable[]):void {
+export default function insertionSort(a: Sortable[]): void {
   if (a == null || a.length < 2) return;
-  for (let i = 1; i < a.length; i+=1) {
+  for (let i = 1; i < a.length; i += 1) {
     const temp = a[i];
     let j = i - 1;
     while (j >= 0 && compare(a[j], temp) > 0) {

@@ -18,6 +18,20 @@ class DecreaseNumber implements Comparable{
 
 describe('InsertionSort',()=>{
 
+    it('should sort already sorted array',()=>{
+        const a=[1,2,3,4,5,6];
+        insertionSort(a);
+
+        expect(a).to.deep.equal([1,2,3,4,5,6]);
+    });
+    
+    it('should sort descendent sorted array',()=>{
+        const a=[6,5,4,3,2,1];
+        insertionSort(a);
+
+        expect(a).to.deep.equal([1,2,3,4,5,6]);
+    });
+
     it('should sort a number array',()=>{
         const a=[4,20,50,10,33,10];
         insertionSort(a);

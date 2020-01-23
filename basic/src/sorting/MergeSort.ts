@@ -1,7 +1,7 @@
 /**
  *
  */
-import { Sortable, Comparable, compare } from '../comparable/Comparable';
+import { Sortable,compare } from '../comparable/Comparable';
 
 /**
  * Time Complexity O(n) since need to loop n times to fill the array of size n;
@@ -15,8 +15,8 @@ function merge(list: Sortable[], start: number, divide: number, end: number): vo
   const left: Sortable[] = [];
   const right: Sortable[] = [];
 
-  for (let i = start; i < divide; i+=1) left[i - start] = list[i];
-  for (let i = divide; i < end; i+=1) right[i - divide] = list[i];
+  for (let i = start; i < divide; i += 1) left[i - start] = list[i];
+  for (let i = divide; i < end; i += 1) right[i - divide] = list[i];
 
   let l = 0; let r = 0; let
     i = start;
