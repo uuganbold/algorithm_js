@@ -3,6 +3,7 @@ import { Sortable, compare } from '../comparable/Comparable';
 
 /**
  * Time Complexity O(n^2) because of it double loop
+ * Best case time complexity is Ω(n) when it is already sorted
  * Space Complexity O(1)
  * @param a
  */

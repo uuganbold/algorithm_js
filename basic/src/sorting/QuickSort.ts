@@ -1,10 +1,13 @@
+/**
+ * Worst-case time complexity O(n^2) when it is already sorted.
+ * Best-case time complexity Ω(nlgn) when it is always partitioned by two arrays with same size.
+ * Average time complexity Θ(nlgn)
+ * 
+ * Space complexity is O(lgn) because of recursion stack.
+ */
 import { Sortable, compare } from '../comparable/Comparable';
+import { swap } from '../utils/ArrayUtils';
 
-function swap(a: Sortable[], i: number, j: number):void {
-  const temp = a[i];
-  a[i] = a[j];
-  a[j] = temp;
-}
 
 function partition(a: Sortable[], left: number, right: number): number {
   const pivot = a[left];
