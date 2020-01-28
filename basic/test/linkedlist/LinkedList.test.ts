@@ -2,21 +2,31 @@ import { expect } from 'chai';
 import LinkedList from '../../src/linkedlist/LinkedList';
 
 describe('LinkedList', () => {
-    it('should size increase and change head after add element', () => {
+    it('should increase size and last element should be changed after add element',()=>{
         const result = new LinkedList<Number>();
         result.add(10);
         expect(result.getSize()).to.be.equal(1);
-        expect(result.peek()).to.be.equal(10);
+        expect(result.get(0)).to.be.equal(10);
         result.add(20)
+        expect(result.getSize()).to.be.equal(2);
+        expect(result.get(1)).to.be.equal(20);
+    });
+
+    it('should size increase and change head after addFirst element', () => {
+        const result = new LinkedList<Number>();
+        result.addFirst(10);
+        expect(result.getSize()).to.be.equal(1);
+        expect(result.peek()).to.be.equal(10);
+        result.addFirst(20)
         expect(result.getSize()).to.be.equal(2);
         expect(result.peek()).to.be.equal(20);
     });
 
     it('should size increased and change element after addAt, cannot be overflowed',()=>{
         const result=new LinkedList<Number>();
-        result.add(10);
-        result.add(20);
-        result.add(30);
+        result.addFirst(10);
+        result.addFirst(20);
+        result.addFirst(30);
         result.addAt(0,40);
         expect(result.getSize()).to.be.equal(4);
         expect(result.get(0)).to.be.equal(40);
@@ -38,7 +48,7 @@ describe('LinkedList', () => {
 
     it('should contain if it is added',()=>{
         const result=new LinkedList<Number>();
-        result.add(10);
+        result.addFirst(10);
         result.addAt(0,20);
         result.addAt(2,40);
 
@@ -50,7 +60,7 @@ describe('LinkedList', () => {
 
     it('should note contain if it is not added',()=>{
         const result=new LinkedList<Number>();
-        result.add(10);
+        result.addFirst(10);
         result.addAt(0,20);
         result.addAt(2,40);
 
@@ -60,10 +70,10 @@ describe('LinkedList', () => {
 
     it('should be removed. size and links should be consistent',()=>{
         const result=new LinkedList<Number>();
-        result.add(10);
-        result.add(30);
-        result.add(50);
-        result.add(70)
+        result.addFirst(10);
+        result.addFirst(30);
+        result.addFirst(50);
+        result.addFirst(70)
         expect(result.remove(30)).to.be.true;
         expect(result.getSize()).to.be.equal(3);
         expect(result.get(2)).to.be.equal(10);
@@ -81,21 +91,21 @@ describe('LinkedList', () => {
         const result=new LinkedList<Number>();
         expect(result.remove(30)).to.be.false;
         expect(result.getSize()).to.be.equal(0);
-        result.add(10);
-        result.add(30);
-        result.add(50);
-        result.add(70);
+        result.addFirst(10);
+        result.addFirst(30);
+        result.addFirst(50);
+        result.addFirst(70);
         expect(result.remove(40)).to.be.false;
         expect(result.getSize()).to.be.equal(4);
     })
     
     it('shoule be removed by index if is belongs to the list',()=>{
         const result=new LinkedList<Number>();
-        result.add(10);
-        result.add(30);
-        result.add(50);
-        result.add(70);
-        result.add(90);
+        result.addFirst(10);
+        result.addFirst(30);
+        result.addFirst(50);
+        result.addFirst(70);
+        result.addFirst(90);
 
         expect(result.removeAt(2)).to.be.true;
         expect(result.getSize()).to.be.equal(4);
@@ -113,11 +123,11 @@ describe('LinkedList', () => {
 
     it('should not be deleted if index is out of the size',()=>{
         const result=new LinkedList<Number>();
-        result.add(10);
-        result.add(30);
-        result.add(50);
-        result.add(70);
-        result.add(90);
+        result.addFirst(10);
+        result.addFirst(30);
+        result.addFirst(50);
+        result.addFirst(70);
+        result.addFirst(90);
 
         expect(result.removeAt(-1)).to.be.false;
         expect(result.removeAt(5)).to.be.false;

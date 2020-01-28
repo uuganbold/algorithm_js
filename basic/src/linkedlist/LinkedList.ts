@@ -26,11 +26,30 @@ export default class LinkedList<T> {
    * Time complexity will be O(1)
    * @param data Data to be added to the list
    */
-  public add(data: T): void{
+  public addFirst(data: T): void{
     const node = new LinkedListNode(data);
     node.next = this.head;
     this.head = node;
     this.size += 1;
+  }
+
+  /**
+   * Add element to linked list at the end of the list
+   * Time compexity is O(n)
+   * @param data 
+   */
+  public add(data:T):void{
+    const node=new LinkedListNode(data);
+    if(this.head===null){
+      this.head=node;
+    }else{
+      let current=this.head;
+      while(current.next!=null){
+        current=current.next;
+      }
+      current.next=node;
+    }
+    this.size+=1;
   }
 
   /**
