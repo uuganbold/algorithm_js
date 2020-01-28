@@ -11,9 +11,7 @@
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "test-mocha": "cross-env TS_NODE_FILES=true mocha --exit --require ts-node/register --colors test/**/*.ts",
-    "coverage": "nyc npm run test"
+    "test:coverage": "jest --coverage"
   },
   "devDependencies": {
     "@types/enzyme": "^3.10.4",
