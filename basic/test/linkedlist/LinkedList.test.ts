@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import LinkedList from '../../src/linkedlist/LinkedList';
+import DecreaseNumber from '../sorting/DecreaseNumber';
 
 describe('LinkedList', () => {
     it('should increase size and last element should be changed after add element',()=>{
@@ -152,6 +153,96 @@ describe('LinkedList', () => {
         expect(list.peek()).to.be.null;
         expect(list.getSize()).to.be.equal(0);
         expect(list.isEmpty()).to.be.true;
+    })
+
+    it('should be converted to string',()=>{
+        const list=new LinkedList<Number>();
+        expect(list.toString()).to.be.equal('[]');
+        list.add(1);
+        expect(list.toString()).to.be.equal('[1->]');
+        list.add(3);
+        expect(list.toString()).to.be.equal('[1->3->]');
+        list.add(0);
+        expect(list.toString()).to.be.equal('[1->3->0->]');
+    })
+
+    it('toArray',()=>{
+        const list=new LinkedList<Number>();
+        expect(list.toArray()).to.be.deep.equal([]);
+        list.add(1);
+        expect(list.toArray()).to.be.deep.equal([1]);
+        list.add(3);
+        expect(list.toArray()).to.be.deep.equal([1,3]);
+        list.add(0);
+        expect(list.toArray()).to.be.deep.equal([1,3,0]);
+    })
+
+    it('numbers should be sorted properly',()=>{
+        const list=new LinkedList<Number>();
+        list.sort();
+        expect(list.peek()).to.be.null;
+
+        list.addFirst(4);
+        list.addFirst(25);
+        list.addFirst(1);
+        list.addFirst(5);
+        list.addFirst(7);
+        list.addFirst(2);
+        list.sort();
+        expect(list.toArray()).to.be.deep.equal([1,2,4,5,7,25]);
+        list.sort();
+        expect(list.toArray()).to.be.deep.equal([1,2,4,5,7,25]);
+        
+        list.clear();
+        list.add(34);
+        list.add(34);
+        list.add(34);
+        list.add(25);
+        list.add(14);
+        list.add(10);
+        list.add(3);
+        list.add(2);
+        list.sort();
+        expect(list.toArray()).to.be.deep.equal([2,3,10,14,25,34,34,34]);
+    })
+
+    it('comparable should be sorted properly',()=>{
+        const list=new LinkedList<DecreaseNumber>();
+        list.sort();
+        expect(list.peek()).to.be.null;
+
+        const four=new DecreaseNumber(4);
+        const twentyfive=new DecreaseNumber(25);
+        const one=new DecreaseNumber(1);
+        const five=new DecreaseNumber(5);
+        const seven=new DecreaseNumber(7);
+        const two=new DecreaseNumber(2);
+        const thirtyfour=new DecreaseNumber(34);
+        const thirtyfour_2=new DecreaseNumber(34);
+        
+
+        list.addFirst(four);
+        list.addFirst(twentyfive);
+        list.addFirst(one);
+        list.addFirst(five);
+        list.addFirst(seven);
+        list.addFirst(two);
+        list.sort();
+        expect(list.toArray()).to.be.deep.equal([twentyfive,seven,five,four,two,one]);
+        list.sort();
+        expect(list.toArray()).to.be.deep.equal([twentyfive,seven,five,four,two,one]);
+        
+        list.clear();
+        list.add(one);
+        list.add(two);
+        list.add(four);
+        list.add(five);
+        list.add(seven);
+        list.add(twentyfive);
+        list.add(thirtyfour);
+        list.add(thirtyfour_2);
+        list.sort();
+        expect(list.toArray()).to.be.deep.equal([thirtyfour_2,thirtyfour,twentyfive,seven,five,four,two,one]);
     })
 });
 
