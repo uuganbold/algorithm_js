@@ -1,3 +1,5 @@
+import { isSortable, compare, Sortable } from "../comparable/Comparable";
+
 /**
  *
  */
@@ -105,6 +107,9 @@ export default class LinkedList<T> {
     return this.head==null;
   }
 
+  /**
+   * Time complexity O(n)
+   */
   public getSize(): number {
     let size=0;
     let current=this.head;
@@ -132,6 +137,10 @@ export default class LinkedList<T> {
     return true;
   }
 
+  /**
+   * Time complexity O(n)
+   * @param index 
+   */
   public removeAt(index: number): boolean {
     if (index < 0) return false;
 
@@ -152,6 +161,10 @@ export default class LinkedList<T> {
     return true;
   }
 
+  /**
+   * Time complexity O(n)
+   * @param index 
+   */
   public get(index: number): T {
     let node = this.head;
     let i = index;
@@ -166,6 +179,74 @@ export default class LinkedList<T> {
   public peek(): T {
     if (this.isEmpty()) return null;
     return this.head.data;
+  }
+
+  public toArray():T[]{
+    let result:T[]=[];
+    let current=this.head;
+    while(current!=null){
+       result.push(current.data);
+       current=current.next;
+    }
+    return result;
+  }
+
+  public sort():void{
+      if(this.head===null) return;
+      if(!isSortable(this.head.data)) throw new TypeError("Cannot be sortable");
+      this.head=this.mergeSort(this.head);
+  }
+
+  private mergeSort(h:LinkedListNode<T>):LinkedListNode<T>{
+      if(h.next!=null){
+            let middle=this.middle(h);
+            let right=middle.next;
+            let left=h;
+            middle.next=null;
+            left=this.mergeSort(left);
+            right=this.mergeSort(right);
+            return this.merge(left,right);
+      }else return h;
+  }
+
+  private middle(h:LinkedListNode<T>){
+      let slow=h;
+      let fast=h;
+      let middle=null;
+      while(fast!=null&&fast.next!=null){
+        middle=slow;
+        slow=slow.next;
+        fast=fast.next.next;
+      }
+      return middle;
+  }
+
+  private merge(left:LinkedListNode<T>, right:LinkedListNode<T>):LinkedListNode<T>{
+      let newHead;
+      let current;
+      while(left!=null&&right!=null){
+           let toBeAdded;
+           if(compare(left.data as unknown as Sortable,
+                    right.data as unknown as Sortable)>0){
+                    toBeAdded=right;
+                    right=right.next;
+            }else {
+                toBeAdded=left;
+                left=left.next;
+            } 
+            if(current==null){
+                current=toBeAdded;
+                newHead=current;
+            }else{
+                current.next=toBeAdded;
+                current=toBeAdded;    
+            }
+      }
+
+      if(left!=null) current.next=left;
+      if(right!=null) current.next=right;
+
+      return newHead;
   }
 
   public toString(): string {
