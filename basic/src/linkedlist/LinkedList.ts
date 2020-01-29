@@ -15,11 +15,8 @@ class LinkedListNode<T> {
 export default class LinkedList<T> {
   private head: LinkedListNode<T>;
 
-  private size: number;
-
   constructor() {
     this.head = null;
-    this.size = 0;
   }
 
   /**
@@ -30,7 +27,6 @@ export default class LinkedList<T> {
     const node = new LinkedListNode(data);
     node.next = this.head;
     this.head = node;
-    this.size += 1;
   }
 
   /**
@@ -49,7 +45,6 @@ export default class LinkedList<T> {
       }
       current.next=node;
     }
-    this.size+=1;
   }
 
   /**
@@ -58,25 +53,30 @@ export default class LinkedList<T> {
    * @param data  data belonging to the new node.
    */
   public addAt(index: number, data: T): void {
-    if (index < 0 || index > this.size) {
+    if (index < 0) {
       throw new RangeError('The member cannot be added at out of the size');
     }
 
-    const newNode = new LinkedListNode(data);
-    if (index === 0) {
-      newNode.next = this.head;
-      this.head = newNode;
-    } else {
-      let i = index;
-      let node = this.head;
-      while (i > 1) {
-        node = node.next;
-        i -= 1;
-      }
-      newNode.next = node.next;
-      node.next = newNode;
+    let parent=null;
+    let current=this.head;
+    let i=index;
+    while(current!=null&&i>0){
+       parent=current;
+       current=current.next;
+       i-=1;
     }
-    this.size += 1;
+
+    if(i>0) {
+       throw new RangeError('The member cannot be added at out of the size');
+    }  
+    const newNode=new LinkedListNode(data);
+    newNode.next=current;
+    if(parent==null){
+        this.head=newNode;
+    }else{
+        parent.next=newNode;
+    }
+
   }
 
   /**
@@ -84,7 +84,6 @@ export default class LinkedList<T> {
    */
   public clear(): void{
     this.head = null;
-    this.size=0;
   }
 
   /**
@@ -103,11 +102,17 @@ export default class LinkedList<T> {
    * Time complexity O(1)
    */
   public isEmpty(): boolean {
-    return this.size === 0;
+    return this.head==null;
   }
 
   public getSize(): number {
-    return this.size;
+    let size=0;
+    let current=this.head;
+    while(current!=null){
+      current=current.next;
+      size+=1;
+    }
+    return size;
   }
 
   /**
@@ -124,23 +129,26 @@ export default class LinkedList<T> {
     if (node == null) return false;
     if (parent != null) parent.next = node.next;
     else this.head = node.next;
-    this.size -= 1;
     return true;
   }
 
   public removeAt(index: number): boolean {
-    if (index < 0 || index >= this.size) return false;
-    let node = this.head;
-    let parent = null;
-    let i = index;
-    while (i > 0) {
-      parent = node;
-      node = node.next;
-      i -= 1;
+    if (index < 0) return false;
+
+    let parent=null;
+    let current=this.head;
+    let i=index;
+    while(current!=null&&i>0){
+       parent=current;
+       current=current.next;
+       i-=1;
     }
-    if (parent != null) parent.next = node.next;
-    else this.head = node.next;
-    this.size -= 1;
+
+    if(current==null) return false;
+
+    if (parent != null) parent.next = current.next;
+    else this.head = current.next;
+
     return true;
   }
 
@@ -156,7 +164,7 @@ export default class LinkedList<T> {
   }
 
   public peek(): T {
-    if (this.head == null) return null;
+    if (this.isEmpty()) return null;
     return this.head.data;
   }
 

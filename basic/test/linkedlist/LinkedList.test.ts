@@ -27,9 +27,14 @@ describe('LinkedList', () => {
 
     it('should size increased and change element after addAt, cannot be overflowed',()=>{
         const result=new LinkedList<Number>();
-        result.addFirst(10);
-        result.addFirst(20);
-        result.addFirst(30);
+        expect(()=>result.addAt(1,40)).to.throw(RangeError);
+
+        result.addAt(0,10);
+        expect(result.getSize()).to.be.equal(1);
+        expect(result.get(0)).to.be.equal(10);
+
+        result.addAt(0,20);
+        result.addAt(0,30);
         result.addAt(0,40);
         expect(result.getSize()).to.be.equal(4);
         expect(result.get(0)).to.be.equal(40);
