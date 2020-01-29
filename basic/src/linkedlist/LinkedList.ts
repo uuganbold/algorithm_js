@@ -84,6 +84,7 @@ export default class LinkedList<T> {
    */
   public clear(): void{
     this.head = null;
+    this.size=0;
   }
 
   /**

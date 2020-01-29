@@ -10,6 +10,9 @@ describe('LinkedList', () => {
         result.add(20)
         expect(result.getSize()).to.be.equal(2);
         expect(result.get(1)).to.be.equal(20);
+        result.add(50)
+        expect(result.getSize()).to.be.equal(3);
+        expect(result.get(2)).to.be.equal(50);
     });
 
     it('should size increase and change head after addFirst element', () => {
@@ -132,6 +135,18 @@ describe('LinkedList', () => {
         expect(result.removeAt(-1)).to.be.false;
         expect(result.removeAt(5)).to.be.false;
         expect(result.removeAt(6)).to.be.false;
+    })
+
+    it('should be cleared',()=>{
+        const list=new LinkedList<Number>();
+        list.addFirst(10);
+        list.addFirst(20);
+        list.addFirst(30);
+
+        list.clear();
+        expect(list.peek()).to.be.null;
+        expect(list.getSize()).to.be.equal(0);
+        expect(list.isEmpty()).to.be.true;
     })
 });
 
