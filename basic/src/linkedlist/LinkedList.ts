@@ -1,4 +1,4 @@
-import { isSortable, compare, Sortable } from "../comparable/Comparable";
+import { isSortable, compare, Sortable } from '../comparable/Comparable';
 
 /**
  *
@@ -34,18 +34,18 @@ export default class LinkedList<T> {
   /**
    * Add element to linked list at the end of the list
    * Time compexity is O(n)
-   * @param data 
+   * @param data
    */
-  public add(data:T):void{
-    const node=new LinkedListNode(data);
-    if(this.head===null){
-      this.head=node;
-    }else{
-      let current=this.head;
-      while(current.next!=null){
-        current=current.next;
+  public add(data: T): void{
+    const node = new LinkedListNode(data);
+    if (this.head === null) {
+      this.head = node;
+    } else {
+      let current = this.head;
+      while (current.next != null) {
+        current = current.next;
       }
-      current.next=node;
+      current.next = node;
     }
   }
 
@@ -59,26 +59,25 @@ export default class LinkedList<T> {
       throw new RangeError('The member cannot be added at out of the size');
     }
 
-    let parent=null;
-    let current=this.head;
-    let i=index;
-    while(current!=null&&i>0){
-       parent=current;
-       current=current.next;
-       i-=1;
+    let parent = null;
+    let current = this.head;
+    let i = index;
+    while (current != null && i > 0) {
+      parent = current;
+      current = current.next;
+      i -= 1;
     }
 
-    if(i>0) {
-       throw new RangeError('The member cannot be added at out of the size');
-    }  
-    const newNode=new LinkedListNode(data);
-    newNode.next=current;
-    if(parent==null){
-        this.head=newNode;
-    }else{
-        parent.next=newNode;
+    if (i > 0) {
+      throw new RangeError('The member cannot be added at out of the size');
     }
-
+    const newNode = new LinkedListNode(data);
+    newNode.next = current;
+    if (parent == null) {
+      this.head = newNode;
+    } else {
+      parent.next = newNode;
+    }
   }
 
   /**
@@ -104,18 +103,18 @@ export default class LinkedList<T> {
    * Time complexity O(1)
    */
   public isEmpty(): boolean {
-    return this.head==null;
+    return this.head == null;
   }
 
   /**
    * Time complexity O(n)
    */
   public getSize(): number {
-    let size=0;
-    let current=this.head;
-    while(current!=null){
-      current=current.next;
-      size+=1;
+    let size = 0;
+    let current = this.head;
+    while (current != null) {
+      current = current.next;
+      size += 1;
     }
     return size;
   }
@@ -139,21 +138,21 @@ export default class LinkedList<T> {
 
   /**
    * Time complexity O(n)
-   * @param index 
+   * @param index
    */
   public removeAt(index: number): boolean {
     if (index < 0) return false;
 
-    let parent=null;
-    let current=this.head;
-    let i=index;
-    while(current!=null&&i>0){
-       parent=current;
-       current=current.next;
-       i-=1;
+    let parent = null;
+    let current = this.head;
+    let i = index;
+    while (current != null && i > 0) {
+      parent = current;
+      current = current.next;
+      i -= 1;
     }
 
-    if(current==null) return false;
+    if (current == null) return false;
 
     if (parent != null) parent.next = current.next;
     else this.head = current.next;
@@ -163,7 +162,7 @@ export default class LinkedList<T> {
 
   /**
    * Time complexity O(n)
-   * @param index 
+   * @param index
    */
   public get(index: number): T {
     let node = this.head;
@@ -181,85 +180,88 @@ export default class LinkedList<T> {
     return this.head.data;
   }
 
-  public toArray():T[]{
-    let result:T[]=[];
-    let current=this.head;
-    while(current!=null){
-       result.push(current.data);
-       current=current.next;
+  public toArray(): T[] {
+    const result: T[] = [];
+    let current = this.head;
+    while (current != null) {
+      result.push(current.data);
+      current = current.next;
     }
     return result;
   }
 
-  public sort():void{
-      if(this.head===null) return;
-      if(!isSortable(this.head.data)) throw new TypeError("Cannot be sortable");
-      this.head=this.mergeSort(this.head);
+  public sort(): void{
+    if (this.head === null) return;
+    if (!isSortable(this.head.data)) throw new TypeError('Cannot be sortable');
+    this.head = this.mergeSort(this.head);
   }
 
   /**
    * O(nlgn)
-   * @param h 
+   * @param h
    */
-  private mergeSort(h:LinkedListNode<T>):LinkedListNode<T>{
-      if(h.next!=null){
-            let middle=this.middle(h);
-            let right=middle.next;
-            let left=h;
-            middle.next=null;
-            left=this.mergeSort(left);
-            right=this.mergeSort(right);
-            return this.merge(left,right);
-      }else return h;
+  private mergeSort(h: LinkedListNode<T>): LinkedListNode<T> {
+    if (h.next != null) {
+      const middle = this.middle(h);
+      let right = middle.next;
+      let left = h;
+      middle.next = null;
+      left = this.mergeSort(left);
+      right = this.mergeSort(right);
+      return this.merge(left, right);
+    } return h;
   }
 
   /**
    * O(n)
-   * @param h 
+   * @param h
    */
-  private middle(h:LinkedListNode<T>){
-      let slow=h;
-      let fast=h;
-      let middle=null;
-      while(fast!=null&&fast.next!=null){
-        middle=slow;
-        slow=slow.next;
-        fast=fast.next.next;
-      }
-      return middle;
+  private middle(h: LinkedListNode<T>): LinkedListNode<T> {
+    let slow = h;
+    let fast = h;
+    let middle = null;
+    while (fast != null && fast.next != null) {
+      middle = slow;
+      slow = slow.next;
+      fast = fast.next.next;
+    }
+    return middle;
   }
 
   /**
    * O(n)
-   * @param left 
-   * @param right 
+   * @param left
+   * @param right
    */
-  private merge(left:LinkedListNode<T>, right:LinkedListNode<T>):LinkedListNode<T>{
-      let newHead;
-      let current;
-      while(left!=null&&right!=null){
-           let toBeAdded;
-           if(compare(left.data as unknown as Sortable,
-                    right.data as unknown as Sortable)>0){
-                    toBeAdded=right;
-                    right=right.next;
-            }else {
-                toBeAdded=left;
-                left=left.next;
-            } 
-            if(current==null){
-                current=toBeAdded;
-                newHead=current;
-            }else{
-                current.next=toBeAdded;
-                current=toBeAdded;    
-            }
+  private merge(left: LinkedListNode<T>, right: LinkedListNode<T>): LinkedListNode<T> {
+    let newHead;
+    let current;
+
+    let l = left;
+    let r = right;
+    while (l != null && r != null) {
+      let toBeAdded;
+      if (compare(l.data as unknown as Sortable,
+        r.data as unknown as Sortable) > 0) {
+        toBeAdded = r;
+        r = r.next;
+      } else {
+        toBeAdded = l;
+        l = l.next;
       }
+      if (current == null) {
+        current = toBeAdded;
+        newHead = current;
+      } else {
+        current.next = toBeAdded;
+        current = toBeAdded;
+      }
+    }
 
-      if(left!=null) current.next=left;
-      if(right!=null) current.next=right;
+    if (l != null) current.next = l;
+    if (r != null) current.next = r;
 
-      return newHead;
+    return newHead;
   }
 
   public toString(): string {

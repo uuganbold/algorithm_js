@@ -1,7 +1,7 @@
 /**
  *
  */
-import { Sortable,compare } from '../comparable/Comparable';
+import { Sortable, compare } from '../comparable/Comparable';
 
 /**
  * Time Complexity O(n) since need to loop n times to fill the array of size n;

@@ -2,7 +2,7 @@
  * Worst-case time complexity O(n^2) when it is already sorted.
  * Best-case time complexity Ω(nlgn) when it is always partitioned by two arrays with same size.
  * Average time complexity Θ(nlgn)
- * 
+ *
  * Space complexity is O(lgn) because of recursion stack.
  */
 import { Sortable, compare } from '../comparable/Comparable';

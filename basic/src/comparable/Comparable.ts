@@ -13,9 +13,9 @@ export function compare(a: Sortable, b: Sortable): number {
   return a.compare(b as Comparable);
 }
 
-export function isSortable(object:any):object is Sortable{
-    if(typeof object==='number' || typeof object==='string'){
-      return true;
-    }
-    return 'compare' in object;
+export function isSortable(object: any): object is Sortable {
+  if (typeof object === 'number' || typeof object === 'string') {
+    return true;
+  }
+  return 'compare' in object;
 }
