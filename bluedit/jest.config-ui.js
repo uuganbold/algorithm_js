@@ -1,14 +1,14 @@
 module.exports = {
     "testEnvironment": "jsdom",
     "roots": [
-      "<rootDir>/test"
+      "<rootDir>"
     ],
     "preset": 'ts-jest',
     "setupFilesAfterEnv": ["<rootDir>/setupTests.ts"],
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
-    "testRegex": "(/__test__/.*|(\\.|/)(test|spec))\\.tsx?$",
+    "testRegex": "\\/src\\/pages\\/.*(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
     "moduleFileExtensions": [
       "ts",
       "tsx",
@@ -17,7 +17,7 @@ module.exports = {
       "json",
       "node"
     ],
-    "testPathIgnorePatterns": ["<rootDir>/.next/", "<rootDir>/node_modules/","<rootDir>/dist/","<rootDir>/test/backend"],
+    "testPathIgnorePatterns": ["<rootDir>/.next/", "<rootDir>/node_modules/","<rootDir>/dist/"],
     "snapshotSerializers": ["enzyme-to-json/serializer"],
   
     // https://github.com/zeit/next.js/issues/8663#issue-490553899
