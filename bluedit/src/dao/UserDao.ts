@@ -1,4 +1,3 @@
-import db from './init'
 import User from '../business/entities/User'
 import CrudDao from './CrudDao';
 import BaseDao from './BaseDao';
@@ -21,7 +20,7 @@ class UserDao extends BaseDao implements CrudDao<User,string>{
      * @param email 
      */
     public async findByEmail(email: string):Promise<User>{
-        let colRef=await db.collection(COLLECTION_NAME).where('email','==',email).get();
+        let colRef=await this.db.collection(COLLECTION_NAME).where('email','==',email).get();
         return colRef.docs.length>0?colRef.docs[0].data() as User:null;
     }
     
@@ -30,7 +29,7 @@ class UserDao extends BaseDao implements CrudDao<User,string>{
      * @param user User to be saved
      */
     public async save(user:User):Promise<User>{
-        const userRef=db.collection(COLLECTION_NAME).doc(user.username);
+        const userRef=this.db.collection(COLLECTION_NAME).doc(user.username);
         await userRef.set(user);
         return user;
     }
@@ -53,7 +52,7 @@ class UserDao extends BaseDao implements CrudDao<User,string>{
      */
     public async findOne(username:string):Promise<User>{
         let user:User=null;
-        const userRef=db.collection(COLLECTION_NAME).doc(username);
+        const userRef=this.db.collection(COLLECTION_NAME).doc(username);
         user=(await userRef.get()).data() as User;
         if(typeof user==='undefined') return null;
         return user;
@@ -82,7 +81,7 @@ class UserDao extends BaseDao implements CrudDao<User,string>{
      */
     public async findAll():Promise<Array<User>>{
         const result:User[]=[];
-        const colRef=db.collection(COLLECTION_NAME);
+        const colRef=this.db.collection(COLLECTION_NAME);
         (await colRef.get()).forEach(doc=>result.push(doc.data() as User));
         return result;
     };
@@ -94,7 +93,7 @@ class UserDao extends BaseDao implements CrudDao<User,string>{
      */
     public async findAllByIDs(usernames:string[]):Promise<Array<User>>{
         const result:User[]=[];
-        const colRef=db.collection(COLLECTION_NAME);
+        const colRef=this.db.collection(COLLECTION_NAME);
         let i=0;
         while(i<usernames.length){
             const ids=usernames.slice(i,i+10);
@@ -112,7 +111,7 @@ class UserDao extends BaseDao implements CrudDao<User,string>{
         return new Promise<number>((resolve, reject)=>{
             let count = 0;
 
-            db.collection(COLLECTION_NAME).select().stream()
+            this.db.collection(COLLECTION_NAME).select().stream()
                 .on('data', (snap) => {
                      ++count;
                 }).on('end',()=>{
@@ -126,7 +125,7 @@ class UserDao extends BaseDao implements CrudDao<User,string>{
      * @param username 
      */
     public async deleteByID(username:string):Promise<void>{
-        await db.collection(COLLECTION_NAME).doc(username).delete();
+        await this.db.collection(COLLECTION_NAME).doc(username).delete();
     };
 
     /**
@@ -152,7 +151,7 @@ class UserDao extends BaseDao implements CrudDao<User,string>{
      * It is @see BaseDao#deleteCollection
      */
     public async deleteAll():Promise<void>{
-        await this.deleteCollection(db,COLLECTION_NAME,10);
+        await this.deleteCollection(COLLECTION_NAME,10);
     };
 }
 

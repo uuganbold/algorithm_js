@@ -1,5 +1,6 @@
 import UserService from '../UserService'
 import UserDao from '../../../dao/UserDao'
+import db from '../../../dao/firestore';
 import User from '../../entities/User';
 import _ from 'lodash';
 import {mocked} from 'ts-jest/utils'
@@ -17,7 +18,7 @@ describe('UserService',()=>{
     /**
      * Mock object behaving same as UserDao
      */
-    const dao=new UserDao();
+    const dao=new UserDao(db);
     const service=new UserService(dao);
 
     /**

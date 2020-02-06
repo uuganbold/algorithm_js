@@ -1,11 +1,12 @@
 import UserDao from '../UserDao'
 import User from '../../business/entities/User'
+import db from '../../dao/firestore'
 
 /**
  * Tests UserDao.
  */
 describe('UserDao',()=>{
-    const dao=new UserDao();
+    const dao=new UserDao(db);
 
     it('database can be cleared',async ()=>{
         await dao.deleteAll();

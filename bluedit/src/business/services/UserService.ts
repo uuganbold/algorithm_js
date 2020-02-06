@@ -1,5 +1,6 @@
 import UserDao from '../../dao/UserDao'
 import User from '../entities/User';
+import ClientError from '../../errors/ClientError';
 
 
 class UserService{
@@ -25,9 +26,9 @@ class UserService{
      */
     async createUser(user:User):Promise<User>{
          if(await this.dao.exists(user.username)){
-             throw new Error('Username exists. Try another username');
+             throw new ClientError('Username exists. Try another username');
          }else if(await this.dao.existsEmail(user.email)){
-            throw new Error('Email exists. Try another email');
+            throw new ClientError('Email exists. Try another email');
          }else
             return await this.dao.save(user);
     }
@@ -42,9 +43,9 @@ class UserService{
     async updateUser(user:User):Promise<User>{
         const userWithSameEmail=await this.dao.findByEmail(user.email);
         if(userWithSameEmail!=null&&userWithSameEmail.username!=user.username){
-            throw new Error('Email exists. Try another email');
+            throw new ClientError('Email exists. Try another email');
         }else if(!(await this.dao.exists(user.username))){
-            throw new Error('User not exists');
+            throw new ClientError('User not exists');
         }else 
             return await this.dao.save(user);
     }
