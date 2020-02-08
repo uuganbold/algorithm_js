@@ -1,4 +1,6 @@
 import React from 'react';
-const Home = () => <h1>Hello world!</h1>;
+import {Button} from 'reactstrap'
+
+const Home = () => <Button>Hello world!</Button>;
 
 export default Home;
