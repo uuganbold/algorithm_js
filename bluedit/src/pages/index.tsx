@@ -1,4 +1,17 @@
 import React from 'react';
-const Home = () => <h1>Hello world!</h1>;
+//import 'bootstrap/dist/css/bootstrap.css';
+import { Button } from 'reactstrap';
 
+
+const Home = () => {
+
+    return (
+        <Button color="primary">primary</Button>
+    )
+
+}
+
+
+ 
 export default Home;
+    

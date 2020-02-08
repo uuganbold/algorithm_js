@@ -3,6 +3,7 @@ import User from '../../business/entities/User'
 import fetch from 'isomorphic-unfetch';
 
 
+
 /**
  * This page shows information about single user.
  */
@@ -12,6 +13,7 @@ const UserPage: NextPage<{ user: User }> = ({ user }) => (
         <div>{user.email}</div>
         <div>{user.password}</div>
         <div>{user.bio}</div>
+
     </div>
   );
   

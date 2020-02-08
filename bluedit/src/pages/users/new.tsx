@@ -1,7 +1,10 @@
 import { NextPage, NextPageContext } from "next";
 import {ChangeEvent, useState} from "react";
 import User from "../../business/entities/User";
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
+
+import { Button } from 'reactstrap';
+
 
 /**
  * This page shows a form to create new user
@@ -97,8 +100,9 @@ const UserCreate:NextPage<{}>=({})=>{
                     Password:<br/>
                     <input type="password" name="password" placeholder="Enter your password" value={password} onChange={handleChange}/><br/>
                     Confirm password:<br/>
-                    <input type="password" name="confirmPass" placeholder="Confirm your password" value={confirmPass} onChange={handleChange}/><br/>
-                    <input type="submit" value="Submit"/>
+                    <input type="password" name="confirmPass" placeholder="Confirm your password" value={confirmPass} onChange={handleChange} /><br />
+                    <Button color="danger">Danger!</Button>
+                    <input type="submit" value="Submit" />
                 </fieldset>
             </form>
         </div>
