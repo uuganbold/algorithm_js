@@ -40,6 +40,7 @@ const validate=(user:User)=>{
  * URI: http://[SERVER]/api/users/[username]
  * METHODS ACCEPTED: GET, POST, PUT 
  */
+
 export default async (req:NextApiRequest, res:NextApiResponse)=>{
     const {
         query: { username },
