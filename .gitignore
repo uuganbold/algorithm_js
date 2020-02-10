@@ -11,6 +11,9 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 
+### VISUAL STUDIO ###
+.vs/*
+
 ### Eclipse ###
 .metadata
 bin/
