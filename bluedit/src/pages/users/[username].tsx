@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import User from '../../business/entities/User'
 import fetch from 'isomorphic-unfetch';
+import Layout from "../components/Layout";
 
 
 
@@ -8,11 +9,14 @@ import fetch from 'isomorphic-unfetch';
  * This page shows information about single user.
  */
 const UserPage: NextPage<{ user: User }> = ({ user }) => (
+    
     <div>
-        <div>{user.username}</div>
-        <div>{user.email}</div>
-        <div>{user.password}</div>
-        <div>{user.bio}</div>
+        <Layout>  </Layout>
+        <h4 className="text-info">User Details Page</h4>
+        <div> <p className="text-muted">Username : </p> <p className="text-primary">{user.username}</p></div>
+        <div> <p className="text-muted">Email : </p>  <p className="text-primary">{user.email}</p> </div>
+        
+        <div> <p className="text-muted">Bio : </p> <p className="text-muted"> {user.bio} </p></div>
 
     </div>
   );
