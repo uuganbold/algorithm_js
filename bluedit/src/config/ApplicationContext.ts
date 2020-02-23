@@ -11,7 +11,8 @@ export default class ApplicationContext{
     private static instance:ApplicationContext;
     private beans:Map<string,any>=new Map();
 
-    public static getInstance():ApplicationContext{
+    public static getInstance(): ApplicationContext{ //returns Application Context
+
         if(ApplicationContext.instance==null){
             ApplicationContext.instance=new ApplicationContext();
         }
