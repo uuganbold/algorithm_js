@@ -1,3 +1,85 @@
+.home-elements {
+    margin-top: 100px;
+    width: 640px;
+    margin-left: 125px;
+}
+
+.create-posts {
+    margin-top: 30px;
+    background-color: rgb(247, 247, 247);
+    border-radius: 4px;
+    border: 1px solid;
+    border-color: #ccc;
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 16px;
+    padding: 8px;
+}
+
+
+.form-inline-search {
+    margin-right: 500px;
+    display: flex;
+    flex-flow: row wrap;
+    flex-direction: row;
+    flex-wrap: wrap;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
 .example {
-    font-size: 70px;
+    background-color: rgb(247, 247, 247);
+    border-radius: 4px;
+    padding-left: 40px;
+    align-items: center;
+    box-sizing: border-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    height: 100%;
+    left: 0;
+    padding: 8px 4px 8px 0;
+    position: absolute;
+    top: 0;
+
+}
+.card-body-custom {
+    margin-left: 45px;
+    width: auto;
+
+}
+
+.vote-button {
+    height: 24px;
+    width: 24px;
+    background: transparent;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    padding: initial;
+}
+.comments-button {
+    color: rgb(156, 156, 156);
+    margin-right: 4px;
+    min-width: 25px;
+    white-space: nowrap;
+    word-break: normal;
+    border-radius: 2px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 16px;
+    padding: 4px;
+}
+
+.container-post {
+    width: 100%;
+}
+
+
+@media (min-width: 960px){
+    .home-elements {
+        width: 640px;
+        margin-left:150px;
+    }
 }
