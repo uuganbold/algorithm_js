@@ -1,0 +1,33 @@
+.sticky-top-custom {
+    flex: 0;
+    left: 0;
+    
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1020;
+    margin-top: 0;
+}
+.navbar-sort-button {
+    box-sizing: border-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 100%;
+}
+.customdivider {
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+.sort{
+    margin-right: 130px;
+}
+.sortnav {
+    width: 100%;
+}

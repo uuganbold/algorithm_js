@@ -7,7 +7,7 @@ import ClientError from "../../../errors/ClientError";
 import _ from "lodash";
 import resolve_error from "../../../errors/ErrorResolver";
 
-const service:UserService=Context.getInstance().getBean("userService");
+const service:UserService=Context.getInstance().getBean("userService"); //using singleton pattern.
 
 /**
  * This function validates user input.
@@ -49,7 +49,7 @@ export default async (req:NextApiRequest, res:NextApiResponse)=>{
       try{
             if(req.method==='GET'){
                  //GET request meaning to retrieve information
-                const user=await service.getUser(username as string);
+                const user=await service.getUser(username as string); //javascrpt object
                 res.json(user);
             }else if(req.method==='POST'){
                 //POST request meaning create new resource
