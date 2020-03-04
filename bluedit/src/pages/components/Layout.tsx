@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './layout.css'
 import {
     FormGroup,
     Collapse,
@@ -24,7 +23,7 @@ import { faSearch, faArrowDown, faCode, faCommentAlt, faAtom } from '@fortawesom
 
 library.add(faRedditAlien, faReddit, faAndroid, faSearch)
 
-const Layout = (props) => {
+const Layout = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggle = () => setIsOpen(!isOpen);
@@ -32,9 +31,9 @@ const Layout = (props) => {
     return (
         <div>
             <Navbar style={{ backgroundColor: '#4FB7F8' }} light expand="md" className="sticky-top-custom">
-                <NavbarBrand href="/index" style={{ color: '#FFFFFF' }}> <FontAwesomeIcon icon={['fab', 'reddit-alien']}/> BlueDit</NavbarBrand>
+                <NavbarBrand href="/index" style={{ color: '#FFFFFF' }}> <FontAwesomeIcon icon={['fab', 'reddit-alien']} /> BlueDit</NavbarBrand>
                 <NavbarToggler onClick={toggle} />
-                <Collapse isOpen={isOpen} navbar>
+                <Collapse isOpen={true} navbar>
                     <Nav className="mr-auto" navbar>
                         <NavItem>
                             <NavLink href="/users/new" style={{ color: '#FFFFFF' }}> Home</NavLink>
