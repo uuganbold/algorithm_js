@@ -40,6 +40,9 @@ import {
 
         <Fragment>
             <Layout> </Layout>
+            <div className="canvas"> 
+                
+                    
             <div className="home-elements">
                 <div className="create-posts">
                     <span>Create Post</span>
@@ -52,8 +55,8 @@ import {
                             <div className="example"><Button className="vote-button"> <FontAwesomeIcon icon="arrow-up" /></Button> <span>1.7k</span>
                                 <Button className="vote-button"><FontAwesomeIcon icon="arrow-down" /></Button> </div> 
                             
-                            <div className="card-body-custom">
-                                <h4>To the try hard LC people</h4>
+                                <div className="card-body-custom">
+                                    <h4> <a href="/posts/post1" style={{ color:"#3E3E3E"}}>To the try hard LC people </a></h4>
                                 <FontAwesomeIcon icon="code" color="green" /> <span> <a href="">r/thecscareerquestions</a> </span>
                                 <span className="text-muted">Posted by <a href=""><span className="text-muted">u/rayyanshaji </span></a> </span> <span className="text-muted">8 hours ago </span>
                                 <p className="card-text">Thank you,
@@ -76,7 +79,7 @@ I did 200 LC and applied to every big N company on the map, interviewed for mont
                                 <Button className="vote-button"><FontAwesomeIcon icon="arrow-down" /></Button> </div>
 
                             <div className="card-body-custom">
-                                <h4>One dose of Magic Mushroom drug reduces anxiety and depression in cancer patients, study says</h4>
+                                    <h4> <a href="/pages/api/post2" style={{ color: "#3E3E3E" }}> One dose of Magic Mushroom drug reduces anxiety and depression in cancer patients, study says </a> </h4>
                                 <FontAwesomeIcon icon="atom" color="#CD6155" /> <span> <a href="">r/science</a> </span>
                                 <span className="text-muted">Posted by <a href=""><span className="text-muted">u/weizhang</span></a> </span> <span className="text-muted">8 hours ago </span>
                                 <p className="card-text">Thank you,
@@ -86,11 +89,13 @@ Some people had good trips and some had bad. Even those with bad experiences oft
                                 </p>
                                 <a href="" className="comments-button"> <FontAwesomeIcon icon="comment-alt" /> 14 Comments </a>
                             </div>
-
+        
                         </div>
                     </div>
                 </div>
             </div>
+                    </div>
+                 
             </div>
 
             </Fragment>

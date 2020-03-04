@@ -1,11 +1,21 @@
+html, body {
+    background: #004962;
+    height: 100%;
+    vertical-align: baseline;
+}
+
+body {
+    position: relative;
+}
+
 .home-elements {
-    margin-top: 100px;
+    margin-top: 80px;
     width: 640px;
-    margin-left: 125px;
+    margin-left: 75px;
 }
 
 .create-posts {
-    margin-top: 30px;
+    margin-top: 20px;
     background-color: rgb(247, 247, 247);
     border-radius: 4px;
     border: 1px solid;
@@ -74,10 +84,172 @@
 
 .container-post {
     width: 100%;
+    margin-top: 10px;
+}
+
+.canvas {
+    background-color: #DAE0E6;
+    position: fixed;
+    display: block;
+    width: 95%;
+    height: 100%;
+    top: 0;
+    margin-left: 32px;
+    margin-right: 0px;
+    bottom: 0;
+
+}
+
+.container-post-individual {
+    margin-top: 110px;
+    
 }
 
 
-@media (min-width: 960px){
+
+.commentline2 {
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    height: 100%;
+    margin-left: 0px;
+    vertical-align: top;
+    width: 100%;
+    border: 1px dashed blue;
+}
+
+.comments-section {
+    box-sizing: border-box;
+    padding-right: 16px;
+    margin: 16px;
+    margin-bottom: 0;
+    margin-left: 10px;
+    padding-bottom: 16px;
+    background: white;
+    border: 2px dashed brown;
+    width: 100%;
+}
+
+
+.media-comment {
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+    transition: background 1s;
+    width: 100%;
+    border: 1px dashed orange;
+}
+
+.empty-space2 {
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    height: 100%;
+    margin-left: 5px;
+    vertical-align: top;
+    width: 16px;
+}
+
+.media-body {
+    border: 1px solid blue;
+    background: transparent;
+    /* border: 1px solid red; */
+    border-radius: 4px;
+    display: flex;
+    margin-left: -23px;
+    padding: 8px 4px 0 0;
+    position: relative;
+    transition: color .5s,fill .5s,background 1s;
+}
+
+.media-border2 {
+    box-sizing: border-box;
+    display: inline-block;
+    height: 100%;
+    vertical-align: top;
+    border: 1px solid red;
+}
+
+.lineholder {
+    background: gray;
+    width: 2%;
+    border: 1px solid black;
+    display: inline-block;
+}
+.comment-box {
+    border-radius: 4px;
+    border: 1px solid orange;
+    box-sizing: border-box;
+    margin-left: 38px;
+    max-width: 800px;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 4px;
+    width: 100%;
+}
+
+
+.comment-reply {
+    border: 1px solid green;
+    margin-left: 0px;
+}
+
+.singlecommment {
+    border: 1px solid blue;
+}
+
+.vd {
+    border-left: 1px solid pink;
+    margin-right: 5px;
+    border: 1px solid red;
+    position: relative;
+}
+.vd2 {
+    width: 5%;
+    height: 100%;
+    margin-top: 45px;
+    margin-left: -10px;
+    left: 0;
+    position: absolute;
+    background-color: black;
+    display: block;
+    top: 0;
+    bottom: 0;
+    border: 1px dashed blue; 
+}
+
+
+.comment1 {
+    box-sizing: border-box;
+    margin-left: 4px;
+    max-width: 800px;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 4px;
+    width: 100%;
+    border-radius: 4px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: transparent;
+    border-image: initial;
+}
+
+.postbackground {
+    background-color: white;
+    position: sticky;
+    display: flex;
+    width: 90%;
+    height: 100%;
+    top: 0;
+    margin-left: 65px;
+    margin-right: 0px;
+    bottom: 0;
+}
+
+
+
+
+@media (min-width: 960px) {
     .home-elements {
         width: 640px;
         margin-left:150px;
