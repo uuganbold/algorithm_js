@@ -1,7 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import Layout from './components/Layout'
 import { NextPage } from "next";
-import './styles.css'
 import Link from "next/link";
 import Post from '../business/entities/Post'
 import fetch from 'isomorphic-unfetch';
@@ -39,7 +38,7 @@ import {
     const Home: NextPage<{ post: Post[] }> = ({ post }) => (
 
         <Fragment>
-            <Layout> </Layout>
+            <Layout/>
             <div className="canvas"> 
                 
                     
