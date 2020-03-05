@@ -42,11 +42,15 @@ const Home = () => (
             <div className="canvas"> </div>
 
 
-                <div className="home-elements">
+        <div className="home-elements">
+            <div className="col-lg-12 mb-8 grid-margin">
+                <div className="row mt-2">
                     <div className="create-posts">
                         <span>Create Post</span>
                         <Input type="textarea" name="text" id="exampleText" />
-                    </div>
+                        </div>
+                </div>
+                </div>
                     <div className="container-post">
                         <div className="row mt-2">
                             <div className="col-lg-12 mb-8 grid-margin">
