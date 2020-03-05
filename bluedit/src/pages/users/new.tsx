@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import Home from "..";
-import Layout from "../components/Layout";
+import Header from "../components/Header";
 
 
 /**
@@ -93,7 +93,7 @@ const UserCreate:NextPage<{}>=({})=>{
     return (
        
         <div>
-            <Layout>  </Layout>
+            <Header/>
            
            <Form onSubmit={handleSubmit}>
                 
