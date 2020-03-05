@@ -1,8 +1,7 @@
 import React, { useState, Fragment } from 'react';
-import Layout from './components/Layout'
-import { NextPage } from "next";
-import Link from "next/link";
-import Post from '../business/entities/Post'
+import { NextPage } from 'next';
+import Header from './components/Header'
+import Post from '../business/entities/Post';
 import fetch from 'isomorphic-unfetch';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -39,7 +38,7 @@ const Home = () => (
     //const Home: NextPage<{ post: Post[] }> = ({ post }) => 
   
         <Fragment>
-            <Layout />
+            <Header />
             <div className="canvas"> </div>
 
 
@@ -118,6 +117,102 @@ const Home = () => (
                         </div>
                     </div>
                 </div>
+
+				<div className="container-post">
+                    <div className="row mt-5">
+                        <div className="col-lg-12 mb-8 grid-margin">
+                            <div className="card h-100">
+                                <div className="example"><Button className="vote-button"> <FontAwesomeIcon icon="arrow-up" /></Button> <span>3.4k</span>
+                                    <Button className="vote-button"><FontAwesomeIcon icon="arrow-down" /></Button> </div>
+
+                                <div className="card-body-custom">
+                                    <h4> <a href="/pages/api/post2" style={{ color: "#3E3E3E" }}> One dose of Magic Mushroom drug reduces anxiety and depression in cancer patients, study says </a> </h4>
+                                    <FontAwesomeIcon icon="atom" color="#CD6155" /> <span> <a href="">r/science</a> </span>
+                                    <span className="text-muted">Posted by <a href=""><span className="text-muted">u/weizhang</span></a> </span> <span className="text-muted">8 hours ago </span>
+                                    <p className="card-text">Thank you,
+                                I saw a segment about this on 60 Minutes about six months ago. They used what they called "heroic doses." So, high-dose. They used it to treat addiction, anxiety and depression.
+
+    Some people had good trips and some had bad. Even those with bad experiences often had good long-term results.
+                                </p>
+                                    <a href="" className="comments-button"> <FontAwesomeIcon icon="comment-alt" /> 14 Comments </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+				<div className="container-post">
+                    <div className="row mt-5">
+                        <div className="col-lg-12 mb-8 grid-margin">
+                            <div className="card h-100">
+                                <div className="example"><Button className="vote-button"> <FontAwesomeIcon icon="arrow-up" /></Button> <span>3.4k</span>
+                                    <Button className="vote-button"><FontAwesomeIcon icon="arrow-down" /></Button> </div>
+
+                                <div className="card-body-custom">
+                                    <h4> <a href="/pages/api/post2" style={{ color: "#3E3E3E" }}> One dose of Magic Mushroom drug reduces anxiety and depression in cancer patients, study says </a> </h4>
+                                    <FontAwesomeIcon icon="atom" color="#CD6155" /> <span> <a href="">r/science</a> </span>
+                                    <span className="text-muted">Posted by <a href=""><span className="text-muted">u/weizhang</span></a> </span> <span className="text-muted">8 hours ago </span>
+                                    <p className="card-text">Thank you,
+                                I saw a segment about this on 60 Minutes about six months ago. They used what they called "heroic doses." So, high-dose. They used it to treat addiction, anxiety and depression.
+
+    Some people had good trips and some had bad. Even those with bad experiences often had good long-term results.
+                                </p>
+                                    <a href="" className="comments-button"> <FontAwesomeIcon icon="comment-alt" /> 14 Comments </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+				<div className="container-post">
+                    <div className="row mt-5">
+                        <div className="col-lg-12 mb-8 grid-margin">
+                            <div className="card h-100">
+                                <div className="example"><Button className="vote-button"> <FontAwesomeIcon icon="arrow-up" /></Button> <span>3.4k</span>
+                                    <Button className="vote-button"><FontAwesomeIcon icon="arrow-down" /></Button> </div>
+
+                                <div className="card-body-custom">
+                                    <h4> <a href="/pages/api/post2" style={{ color: "#3E3E3E" }}> One dose of Magic Mushroom drug reduces anxiety and depression in cancer patients, study says </a> </h4>
+                                    <FontAwesomeIcon icon="atom" color="#CD6155" /> <span> <a href="">r/science</a> </span>
+                                    <span className="text-muted">Posted by <a href=""><span className="text-muted">u/weizhang</span></a> </span> <span className="text-muted">8 hours ago </span>
+                                    <p className="card-text">Thank you,
+                                I saw a segment about this on 60 Minutes about six months ago. They used what they called "heroic doses." So, high-dose. They used it to treat addiction, anxiety and depression.
+
+    Some people had good trips and some had bad. Even those with bad experiences often had good long-term results.
+                                </p>
+                                    <a href="" className="comments-button"> <FontAwesomeIcon icon="comment-alt" /> 14 Comments </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+				<div className="container-post">
+                    <div className="row mt-5">
+                        <div className="col-lg-12 mb-8 grid-margin">
+                            <div className="card h-100">
+                                <div className="example"><Button className="vote-button"> <FontAwesomeIcon icon="arrow-up" /></Button> <span>3.4k</span>
+                                    <Button className="vote-button"><FontAwesomeIcon icon="arrow-down" /></Button> </div>
+
+                                <div className="card-body-custom">
+                                    <h4> <a href="/pages/api/post2" style={{ color: "#3E3E3E" }}> One dose of Magic Mushroom drug reduces anxiety and depression in cancer patients, study says </a> </h4>
+                                    <FontAwesomeIcon icon="atom" color="#CD6155" /> <span> <a href="">r/science</a> </span>
+                                    <span className="text-muted">Posted by <a href=""><span className="text-muted">u/weizhang</span></a> </span> <span className="text-muted">8 hours ago </span>
+                                    <p className="card-text">Thank you,
+                                I saw a segment about this on 60 Minutes about six months ago. They used what they called "heroic doses." So, high-dose. They used it to treat addiction, anxiety and depression.
+
+    Some people had good trips and some had bad. Even those with bad experiences often had good long-term results.
+                                </p>
+                                    <a href="" className="comments-button"> <FontAwesomeIcon icon="comment-alt" /> 14 Comments </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 
 
             </div>
@@ -146,4 +241,3 @@ const Home = () => (
 }*/
  
 export default Home;
-    
