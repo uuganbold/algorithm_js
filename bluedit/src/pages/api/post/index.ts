@@ -7,18 +7,15 @@ import _ from "lodash";
 import resolve_error from "../../../errors/ErrorResolver";
 
 const service: PostService = Context.getInstance().getBean("PostService"); //using singleton pattern
-/**
- * URI: http://[SERVER]/api/Posts/
- * METHODS ACCEPTED: GET
- */
 
+ 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 
     try {
         if (req.method === 'GET') {
             //GET request meaning to retrieve information
-            const post = await service.listPosts(); //javascrpt object
+            const post = await service.listPosts(); //javascript object
             res.json(post);
             //DELETE request has not implemented yet.
         } else {

@@ -9,7 +9,6 @@ body {
 }
 
 .home-elements {
-    margin-top: 80px;
     width: 640px;
     margin-left: 75px;
 }
@@ -88,7 +87,7 @@ body {
 }
 
 .canvas {
-    background-color: #DAE0E6;
+    background-color: #f3f9ff;
     position: fixed;
     display: block;
     width: 95%;
@@ -97,15 +96,11 @@ body {
     margin-left: 32px;
     margin-right: 0px;
     bottom: 0;
-
 }
 
 .container-post-individual {
-    margin-top: 110px;
-    
+    margin-top: 110px; 
 }
-
-
 
 .commentline2 {
     box-sizing: border-box;
