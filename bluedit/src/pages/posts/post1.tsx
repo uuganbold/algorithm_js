@@ -1,7 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import Layout from '../components/Layout'
 import { NextPage } from "next";
-import './../../pages/styles.css'
 import Link from "next/link";
 import fetch from 'isomorphic-unfetch';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -24,7 +23,8 @@ import {
     DropdownToggle,
     DropdownMenu,
     DropdownItem,
-    NavbarText,
+    NavbarText,
+
     Media,
     FormGroup,
     Label,
@@ -38,7 +38,7 @@ import {
 function post1 () {
     return <div>
     <Fragment>
-            <Layout> </Layout>
+            <Layout/> 
             <div className="canvas"> </div>
             <div className="postbackground">
             <div className="container-post-individual">

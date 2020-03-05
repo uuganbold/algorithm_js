@@ -24,7 +24,8 @@ import {
     DropdownToggle,
     DropdownMenu,
     DropdownItem,
-    NavbarText,
+    NavbarText,
+
     Media,
     FormGroup,
     Label,
@@ -48,7 +49,7 @@ import {
                     <Input type="textarea" name="text" id="exampleText" />
                 </div>
             <div className="container-post">
-                <div className="row mt-5">
+                <div className="row mt-2">
                         <div className="col-lg-12 mb-8 grid-margin">
                         <div className="card h-100">
                             <div className="example"><Button className="vote-button"> <FontAwesomeIcon icon="arrow-up" /></Button> <span>1.7k</span>
