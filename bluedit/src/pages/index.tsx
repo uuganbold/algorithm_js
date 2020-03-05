@@ -11,13 +11,13 @@ library.add(faArrowUp, faArrowDown, faCode, faCommentAlt, faAtom);
 
 import { Button, Input } from 'reactstrap';
 
-//const Home = () => {
-
 const Home: NextPage<{ post: Post[] }> = ({ post }) => (
 	<Fragment>
 		<Header />
 		<div className="canvas">
-			<div className="home-elements">
+			
+		</div>
+        <div className="home-elements">
 				<div className="create-posts">
 					<span>Create Post</span>
 					<Input type="textarea" name="text" id="exampleText" />
@@ -387,7 +387,6 @@ const Home: NextPage<{ post: Post[] }> = ({ post }) => (
 				</div>
 			
             </div>
-		</div>
 	</Fragment>
 );
 
