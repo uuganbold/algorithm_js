@@ -1,6 +1,7 @@
 import * as admin from 'firebase-admin';
 
-let serviceAccount = require('../../.local_config/firebase.json');
+//let serviceAccount = require('../../.local_config/firebase.json');
+let serviceAccount = null;
 
 if(!admin.apps.length){
   admin.initializeApp({
