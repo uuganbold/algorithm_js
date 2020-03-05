@@ -20,7 +20,6 @@
 		"@fortawesome/free-solid-svg-icons": "^5.12.1",
 		"@fortawesome/react-fontawesome": "^0.1.8",
 		"bootstrap": "^4.4.1",
-		"classnames": "^2.2.6",
 		"firebase": "^7.8.0",
 		"firebase-admin": "^8.9.2",
 		"isomorphic-unfetch": "^3.0.0",

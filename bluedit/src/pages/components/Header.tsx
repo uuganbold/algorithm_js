@@ -1,20 +1,19 @@
 import { Navbar, NavbarBrand, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, Form, Input, DropdownMenu, DropdownItem, Collapse, NavbarToggler } from "reactstrap"
-import classnames from 'classnames';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as fa from "@fortawesome/free-brands-svg-icons";
 import { useState } from "react";
+import LoginMenu from "./LoginMenu";
 const Header=()=>{
     const [isOpen, setIsOpen] = useState(false);
 
     const toggle = () => setIsOpen(!isOpen);
     return (
-        <Navbar tag='header' expand="md" dark={true} className={classnames('bd-navbar')}>
-            <NavbarBrand className={classnames('mr-0','mr-md-2')} href='/' aria-label='Bluedit'>
+        <Navbar tag='header' expand="md" dark={true} className={'bd-navbar'}>
+            <NavbarBrand className={'mr-0 mr-md-2'} href='/' aria-label='Bluedit'>
                 <FontAwesomeIcon icon={fa.faRedditAlien}/>
             </NavbarBrand>
             <NavbarToggler onClick={toggle}/>
-            <Collapse navbar isOpen={isOpen}>
-            
+            <Collapse navbar isOpen={isOpen}>           
                     <Nav navbar>
                         <NavItem>
                             <NavLink active>Home</NavLink>
@@ -37,16 +36,7 @@ const Header=()=>{
                     <Input type='search' placeholder='Search'/>
                 </Form>
                 <Nav navbar>
-                        <UncontrolledDropdown nav >
-                            <DropdownToggle nav caret>
-                                Uuganbold
-                            </DropdownToggle>
-                            <DropdownMenu>
-                                <DropdownItem >Recent</DropdownItem>
-                                <DropdownItem>Action</DropdownItem>
-                                <DropdownItem>Another Action</DropdownItem>
-                            </DropdownMenu>
-                        </UncontrolledDropdown>
+                    <LoginMenu/>                
                 </Nav>
             </Collapse>
             
