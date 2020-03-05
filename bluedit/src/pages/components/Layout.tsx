@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, FunctionComponent } from 'react';
 import Header from './Header'
 
-const Layout = (props) => {
+type Props={}
+const Layout: FunctionComponent<Props>=({children})=> {
     return (
           <div>
               <Header/>
-              {props.children}
+              {children}
           </div>
     );
 }
