@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from 'react';
-import Layout from '../components/Layout';
+import Header from '../components/Header';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import fetch from 'isomorphic-unfetch';
@@ -36,7 +36,7 @@ function post1() {
 	return (
 		<div>
 			<Fragment>
-				<Layout />
+				<Header />
 				<div className="canvas"> </div>
 				<div className="postbackground">
 					<div className="container-post-individual">
