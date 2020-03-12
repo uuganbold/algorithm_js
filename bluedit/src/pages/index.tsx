@@ -1,4 +1,4 @@
-import Layout from "./components/Layout";
+import Layout from "../components/Layout";
 import { Card, Col, CardHeader, ListGroup, ListGroupItem, CardBody, CardSubtitle, CardTitle, CardText } from "reactstrap";
 import { FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowAltCircleUp, faArrowAltCircleDown, faComment} from "@fortawesome/free-solid-svg-icons"

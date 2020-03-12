@@ -1,22 +1,23 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import ClientError from "../../../errors/ClientError";
-import _ from "lodash";
 import resolve_error from "../../../errors/ErrorResolver";
+import firebase from "../../../firebase/admin";
 import service from "../../../business/services/UserService"
-/**
- * URI: http://[SERVER]/api/users/
- * METHODS ACCEPTED: GET
- */
+import authToken from "../../../helpers/auth";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
- 
-
     try {
         if (req.method === 'GET') {
-            //GET request meaning to retrieve information
-            const user = await service.listUsers(); //javascrpt object
-            res.json(user);
-          //DELETE request has not implemented yet.
+
+            const decodedToken=await authToken(req.headers.authorization);
+        
+            const profile = await service.getUser(decodedToken.uid as string);
+            if(profile==null){
+                res.json({status:false})
+            }else{
+                res.json({status:true,profile})
+            }
+            //DELETE request has not implemented yet.
         } else {
             throw new ClientError("We only supports: GET",405);
         }

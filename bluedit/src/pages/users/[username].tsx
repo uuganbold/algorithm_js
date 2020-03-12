@@ -1,24 +1,21 @@
 import { NextPage } from "next";
 import User from '../../business/entities/User'
 import fetch from 'isomorphic-unfetch';
-import Layout from "../components/Layout";
-
-
+import Layout from "../../components/Layout";
 
 /**
  * This page shows information about single user.
  */
 const UserPage: NextPage<{ user: User }> = ({ user }) => (
     
-    <div>
-        <Layout>  </Layout>
+        <Layout>  
         <h4 className="text-info">User Details Page</h4>
         <div> <p className="text-muted">Username : </p> <p className="text-primary">{user.username}</p></div>
-        <div> <p className="text-muted">Email : </p>  <p className="text-primary">{user.email}</p> </div>
         
         <div> <p className="text-muted">Bio : </p> <p className="text-muted"> {user.bio} </p></div>
+        </Layout>
+        
 
-    </div>
   );
   
 UserPage.getInitialProps = async (context) => {

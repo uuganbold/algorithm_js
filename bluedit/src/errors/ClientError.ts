@@ -1,6 +1,11 @@
 export default class ClientError extends Error{
-    constructor(message:string) {
+
+    public status:number;
+
+    constructor(message:string, status=400) {
         super(message); 
+        this.status=status;
         this.name = "ClientError";
       }
+
 }
