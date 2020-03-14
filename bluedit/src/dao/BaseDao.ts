@@ -4,7 +4,7 @@ export default abstract class BaseDao{
 
     protected db:admin.firestore.Firestore;
 
-    constructor(db:admin.firestore.Firestore){
+    protected constructor(db:admin.firestore.Firestore){
         this.db=db;
     }
 

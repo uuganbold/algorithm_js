@@ -1,14 +1,14 @@
 import Post from './Post'
+import BaseEntity from './BaseEntity';
 
 /**
  * The entity class, each of which represents an User
  */
-export default interface User{
-    bio?:string;
-    email:string;
-    follows?:[];
-    password:string;
-    posts?:Post[];
-    profile_image?:string;
+export default interface User extends BaseEntity{
     username:string;
+    bio?:string;
+    photoURL?:string
+    follows?:[];
+    posts?:Post[];
+
 }
