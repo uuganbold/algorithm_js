@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import Link from "next/link";
 import User from '../../business/entities/User'
 import fetch from 'isomorphic-unfetch';
-import Layout from "../../components/Layout";
+import Layout from "../../components/layout/Layout";
 
 /**
  * This page shows information about single user.
@@ -12,7 +12,7 @@ const UsersPage: NextPage<{ users: User[] }> = ({users}) => (
     <Layout>
         <h4 className="text-info">All Users.</h4>
         {users.map(user => (
-            <div key={user.username}> <Link href='/users/[username]' as={'/users/'+user.username}><a>{user.username}</a></Link></div>
+            <div key={user.username}> <Link href='/u/[username]' as={'/u/'+user.username}><a>{user.username}</a></Link></div>
             )
          )}
     </Layout>

@@ -1,13 +1,16 @@
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Input } from "reactstrap";
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Input, FormFeedback } from "reactstrap";
 import { FunctionComponent, useState, ChangeEvent } from "react";
 
 type Props={
     initialQuery:string,
     handleQueryChange:(q:string)=>void,
     handleSelect:(choice:string)=>void,
-    choices:{key:string,name:string, value:any}[]
+    choices:{key:string,name:string, value:any}[],
+    placeholder:string,
+    inValidText:string,
+    invalid:boolean
 }
-const SearchSelect:FunctionComponent<Props>=({initialQuery, handleQueryChange,choices, handleSelect})=>{
+const SearchSelect:FunctionComponent<Props>=({initialQuery, handleQueryChange,choices, handleSelect,placeholder,inValidText, invalid})=>{
 
     const [isOpen, setIsOpen]=useState(false);
     const [query,setQuery]=useState(initialQuery);
@@ -26,7 +29,8 @@ const SearchSelect:FunctionComponent<Props>=({initialQuery, handleQueryChange,ch
         <Dropdown isOpen={isOpen} toggle={toggle}>
             <DropdownToggle tag='span' data-toggle="dropdown"
                         aria-expanded={isOpen}>
-                 <Input value={query} onChange={handleChange}></Input>
+                 <Input value={query} onChange={handleChange} placeholder={placeholder} invalid={invalid}></Input>
+                <FormFeedback>{inValidText}</FormFeedback>
             </DropdownToggle>
             {choices.length>0&&(
                 <DropdownMenu>

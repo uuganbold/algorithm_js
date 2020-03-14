@@ -1,11 +1,16 @@
 import { FunctionComponent, useContext, Fragment } from "react"
 import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from "reactstrap";
-import UserContext from "./UserContext";
+import UserContext from "../context/UserContext";
 import Link from "next/link";
+import Router from "next/router";
 
 type Props={}
 const LoginMenu:FunctionComponent<Props>=()=>{
     const { user, profile, signOut , signIn} = useContext(UserContext);
+
+    const handleProfile=()=>{
+        Router.push(`/u/[username]`,`/u/${profile.username}`,)
+    }
 
     if(user){
         return (
@@ -15,7 +20,7 @@ const LoginMenu:FunctionComponent<Props>=()=>{
                         {user.displayName}
                     </DropdownToggle>
                     <DropdownMenu>
-                        {profile&&(<DropdownItem><Link href="/users/[username]"  as={`/users/${profile.username}`}><a>My Profile</a></Link></DropdownItem>)}
+                        {profile&&(<DropdownItem onClick={handleProfile}>My Profile</DropdownItem>)}
                         <DropdownItem onClick={signOut}>Log out</DropdownItem>
                     </DropdownMenu>
                 </UncontrolledDropdown>

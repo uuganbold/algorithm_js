@@ -21,6 +21,7 @@ export class CommentService {
             if(parent==null||parent.postid!=post.uid) throw new ClientError("Parent comment not found",404);
         }
 
+        comment.post_date=new Date()
         comment.user=user;
         comment.vote=0;
         return await this.dao.save(comment)
@@ -36,10 +37,22 @@ export class CommentService {
     
     async listComments(post:Post): Promise<Comment[]>{
         const comments:Comment[]= await this.dao.findByPostId(post.uid);
+        const map=new Map();
+        const result:Comment[]=[];
         for(let c of comments){
-            c.children=await this.listCommentByParent(c.uid);
+            map.set(c.uid,c);
         }
-        return comments;
+        for(let c of comments){
+            if(c.parentid==null) result.push(c);
+            else{
+                const parent:Comment=map.get(c.parentid);
+                if(parent==null) {result.push(c); continue;}
+                let siblings:Comment[]=parent.children;
+                if(siblings==null) {siblings=[]; parent.children=siblings }
+                siblings.push(c);
+            }
+        }
+        return result;
     }
 
     async listCommentByParent(parentid:string):Promise<Comment[]>{

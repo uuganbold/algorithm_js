@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css'
 import { useState, FunctionComponent, useEffect } from 'react';
-import UserContext from '../components/UserContext';
+import UserContext from '../components/context/UserContext';
 import { AppProps, AppContext } from 'next/app'
 import firebase from  'firebase/app';
 import clientCredentials from '../firebase/client'
@@ -28,7 +28,7 @@ function MyApp({ Component, pageProps }:AppProps) {
         }).then(async (res)=>{
              const response=(await res.json());
              if(!response.status){
-                Router.push('/users/new');
+                Router.push('/u/new');
              }else{
                 setLoginProfile(response.profile)
              }

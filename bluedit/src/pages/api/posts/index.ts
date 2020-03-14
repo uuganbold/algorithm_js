@@ -25,7 +25,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 post=await service.listPostsBySubdit(subdit);
             }else if(user!=null){
                 post=await service.listPostsByUser(user);
-            }else post=await service.listPosts(); //javascrpt object
+            }else post=await service.listPosts(); 
             res.json(post);
         }else if(req.method==='POST'){
            //POST request meaning create new resource

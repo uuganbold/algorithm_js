@@ -8,11 +8,11 @@ const COLLECTION_NAME="comments";
 export class CommentDao extends BasicCrudDao<Comment>{
     
     async findByPostId(postId: string): Promise<Comment[]> {
-        return this.findAllByWhere("postid","==",postId);
+        return this.findAllByWhere("postid","==",postId,["post_date","desc"]);
     }
 
     async findByParent(parentId:string):Promise<Comment[]>{
-        return this.findAllByWhere("parentid","==",parentId);
+        return this.findAllByWhere("parentid","==",parentId,["post_date","desc"]);
     }
     
     constructor(db:admin.firestore.Firestore){

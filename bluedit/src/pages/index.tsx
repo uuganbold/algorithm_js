@@ -1,182 +1,35 @@
-import Layout from "../components/Layout";
+import Layout from "../components/layout/Layout";
 import { Card, Col, CardHeader, ListGroup, ListGroupItem, CardBody, CardSubtitle, CardTitle, CardText } from "reactstrap";
 import { FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowAltCircleUp, faArrowAltCircleDown, faComment} from "@fortawesome/free-solid-svg-icons"
 import {faFacebook} from "@fortawesome/free-brands-svg-icons"
+import PostInput from "../components/post/PostInput";
+import { NextPage } from "next";
+import Post from "../business/entities/Post";
+import { useState, useContext } from "react";
+import PostCard from "../components/post/PostCard";
+import UserContext from "../components/context/UserContext";
+import _ from "lodash";
 
-const Index=()=>{
 
+const Index:NextPage<{initialPosts:Post[] }> =({initialPosts})=>{
+    const {user}=useContext(UserContext);
+    const [posts,setPosts]=useState(initialPosts);
+    const handlePost=(p:Post)=>{
+        posts.unshift(p);
+        setPosts(_.cloneDeep(posts));
+   }
     return (
         <Layout>
             <Col sm="9" md="6" className="py-md-2 bd-content" tag="main">
-                    <Card className="my-2 d-flex flex-row align-items-stretch">
-                        <CardHeader className="bd-post-rate">
-                            <a><FontAwesomeIcon icon={faArrowAltCircleUp}/></a>
-                            <span className="my-1">93</span>
-                            <a><FontAwesomeIcon icon={faArrowAltCircleDown}/></a>
-                        </CardHeader>
-                        <CardBody>
-                            <CardSubtitle className="bd-post-source mb-2">
-                                <a className="bd-subbluedit"><FontAwesomeIcon icon={faFacebook}/> r/Facebook</a>
-                                <a className="bd-user">u/uuganbold</a> <a>6 hours ago</a>
-                            </CardSubtitle>
-                            <CardTitle>Mini social network that I made as my first MERN stack project.</CardTitle>
-                            <CardText>
-                            KVision is an open source web framework created for the Kotlin language. It
-                                allows developers to build modern web applications in Kotlin, without any use of HTML, CSS
-                                or JavaScript.
-
-                                I have released KVision 3.0.0. This is a major upgrade bringing a few incompatibilities and
-                                breaking changes. Highlights of this release:
-
-                                major improvements to the event handling architecture (including new module with support for
-                                event Flows)
-                            </CardText>
-                            <div className="bd-toolbar"><a className="bd-comments" href="/"><FontAwesomeIcon icon={faComment}/> 57
-                                    Comments</a>
-                            </div>
-                        </CardBody>
-                    </Card>
-                    <Card className="my-2 d-flex flex-row align-items-stretch">
-                        <CardHeader className="bd-post-rate">
-                            <a><FontAwesomeIcon icon={faArrowAltCircleUp}/></a>
-                            <span className="my-1">93</span>
-                            <a><FontAwesomeIcon icon={faArrowAltCircleDown}/></a>
-                        </CardHeader>
-                        <CardBody>
-                            <CardSubtitle className="bd-post-source mb-2">
-                                <a className="bd-subbluedit"><FontAwesomeIcon icon={faFacebook}/> r/Facebook</a>
-                                <a className="bd-user">u/uuganbold</a> <a>6 hours ago</a>
-                            </CardSubtitle>
-                            <CardTitle>Mini social network that I made as my first MERN stack project.</CardTitle>
-                            <CardText>
-                            KVision is an open source web framework created for the Kotlin language. It
-                                allows developers to build modern web applications in Kotlin, without any use of HTML, CSS
-                                or JavaScript.
-
-                                I have released KVision 3.0.0. This is a major upgrade bringing a few incompatibilities and
-                                breaking changes. Highlights of this release:
-
-                                major improvements to the event handling architecture (including new module with support for
-                                event Flows)
-                            </CardText>
-                            <div className="bd-toolbar"><a className="bd-comments" href="/"><FontAwesomeIcon icon={faComment}/> 57
-                                    Comments</a>
-                            </div>
-                        </CardBody>
-                    </Card>
-                    <Card className="my-2 d-flex flex-row align-items-stretch">
-                        <CardHeader className="bd-post-rate">
-                            <a><FontAwesomeIcon icon={faArrowAltCircleUp}/></a>
-                            <span className="my-1">93</span>
-                            <a><FontAwesomeIcon icon={faArrowAltCircleDown}/></a>
-                        </CardHeader>
-                        <CardBody>
-                            <CardSubtitle className="bd-post-source mb-2">
-                                <a className="bd-subbluedit"><FontAwesomeIcon icon={faFacebook}/> r/Facebook</a>
-                                <a className="bd-user">u/uuganbold</a> <a>6 hours ago</a>
-                            </CardSubtitle>
-                            <CardTitle>Mini social network that I made as my first MERN stack project.</CardTitle>
-                            <CardText>
-                            KVision is an open source web framework created for the Kotlin language. It
-                                allows developers to build modern web applications in Kotlin, without any use of HTML, CSS
-                                or JavaScript.
-
-                                I have released KVision 3.0.0. This is a major upgrade bringing a few incompatibilities and
-                                breaking changes. Highlights of this release:
-
-                                major improvements to the event handling architecture (including new module with support for
-                                event Flows)
-                            </CardText>
-                            <div className="bd-toolbar"><a className="bd-comments" href="/"><FontAwesomeIcon icon={faComment}/> 57
-                                    Comments</a>
-                            </div>
-                        </CardBody>
-                    </Card>
-                    <Card className="my-2 d-flex flex-row align-items-stretch">
-                        <CardHeader className="bd-post-rate">
-                            <a><FontAwesomeIcon icon={faArrowAltCircleUp}/></a>
-                            <span className="my-1">93</span>
-                            <a><FontAwesomeIcon icon={faArrowAltCircleDown}/></a>
-                        </CardHeader>
-                        <CardBody>
-                            <CardSubtitle className="bd-post-source mb-2">
-                                <a className="bd-subbluedit"><FontAwesomeIcon icon={faFacebook}/> r/Facebook</a>
-                                <a className="bd-user">u/uuganbold</a> <a>6 hours ago</a>
-                            </CardSubtitle>
-                            <CardTitle>Mini social network that I made as my first MERN stack project.</CardTitle>
-                            <CardText>
-                            KVision is an open source web framework created for the Kotlin language. It
-                                allows developers to build modern web applications in Kotlin, without any use of HTML, CSS
-                                or JavaScript.
-
-                                I have released KVision 3.0.0. This is a major upgrade bringing a few incompatibilities and
-                                breaking changes. Highlights of this release:
-
-                                major improvements to the event handling architecture (including new module with support for
-                                event Flows)
-                            </CardText>
-                            <div className="bd-toolbar"><a className="bd-comments" href="/"><FontAwesomeIcon icon={faComment}/> 57
-                                    Comments</a>
-                            </div>
-                        </CardBody>
-                    </Card>
-                    <Card className="my-2 d-flex flex-row align-items-stretch">
-                        <CardHeader className="bd-post-rate">
-                            <a><FontAwesomeIcon icon={faArrowAltCircleUp}/></a>
-                            <span className="my-1">93</span>
-                            <a><FontAwesomeIcon icon={faArrowAltCircleDown}/></a>
-                        </CardHeader>
-                        <CardBody>
-                            <CardSubtitle className="bd-post-source mb-2">
-                                <a className="bd-subbluedit"><FontAwesomeIcon icon={faFacebook}/> r/Facebook</a>
-                                <a className="bd-user">u/uuganbold</a> <a>6 hours ago</a>
-                            </CardSubtitle>
-                            <CardTitle>Mini social network that I made as my first MERN stack project.</CardTitle>
-                            <CardText>
-                            KVision is an open source web framework created for the Kotlin language. It
-                                allows developers to build modern web applications in Kotlin, without any use of HTML, CSS
-                                or JavaScript.
-
-                                I have released KVision 3.0.0. This is a major upgrade bringing a few incompatibilities and
-                                breaking changes. Highlights of this release:
-
-                                major improvements to the event handling architecture (including new module with support for
-                                event Flows)
-                            </CardText>
-                            <div className="bd-toolbar"><a className="bd-comments" href="/"><FontAwesomeIcon icon={faComment}/> 57
-                                    Comments</a>
-                            </div>
-                        </CardBody>
-                    </Card>
-                    <Card className="my-2 d-flex flex-row align-items-stretch">
-                        <CardHeader className="bd-post-rate">
-                            <a><FontAwesomeIcon icon={faArrowAltCircleUp}/></a>
-                            <span className="my-1">93</span>
-                            <a><FontAwesomeIcon icon={faArrowAltCircleDown}/></a>
-                        </CardHeader>
-                        <CardBody>
-                            <CardSubtitle className="bd-post-source mb-2">
-                                <a className="bd-subbluedit"><FontAwesomeIcon icon={faFacebook}/> r/Facebook</a>
-                                <a className="bd-user">u/uuganbold</a> <a>6 hours ago</a>
-                            </CardSubtitle>
-                            <CardTitle>Mini social network that I made as my first MERN stack project.</CardTitle>
-                            <CardText>
-                            KVision is an open source web framework created for the Kotlin language. It
-                                allows developers to build modern web applications in Kotlin, without any use of HTML, CSS
-                                or JavaScript.
-
-                                I have released KVision 3.0.0. This is a major upgrade bringing a few incompatibilities and
-                                breaking changes. Highlights of this release:
-
-                                major improvements to the event handling architecture (including new module with support for
-                                event Flows)
-                            </CardText>
-                            <div className="bd-toolbar"><a className="bd-comments" href="/"><FontAwesomeIcon icon={faComment}/> 57
-                                    Comments</a>
-                            </div>
-                        </CardBody>
-                    </Card>
+                    {
+                        user&&(
+                            <PostInput handleSuccessPost={handlePost}/>                    
+                        )
+                    }
+                    {posts&&(
+                        posts.map(p=><PostCard key={p.uid} post={p}/>)
+                    )}
             </Col>
             <div className="d-none d-md-block col-md-3 bd-toc py-md-3">
                     <Card>
@@ -196,5 +49,11 @@ const Index=()=>{
         </Layout>
     )
 }
+
+Index.getInitialProps = async (context) => {
+    const postRes=await fetch(`http://localhost:3000/api/posts`)
+    const initialPosts:Post[]=await postRes.json();
+    return { initialPosts};
+};
 
 export default Index;

@@ -5,7 +5,7 @@ import resolve_error from "../../../../../errors/ErrorResolver";
 import postService from '../../../../../business/services/PostService'
 import authToken from "../../../../../helpers/auth";
 import commentService from "../../../../../business/services/CommentService";
-
+import Comment from "../../../../../business/entities/Comment"
 /**
  * URI: http://[SERVER]/api/[post-id]/comments
  * METHODS ACCEPTED: GET,POST
@@ -23,8 +23,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             res.json(await commentService.listComments(post));
         
         }else if(req.method==='POST'){
-            const comment=JSON.parse(req.body);
+            const comment:Comment=JSON.parse(req.body);
             const decodedToken=await authToken(req.headers.authorization);
+            comment.postid=postid as string;
             res.json(await commentService.createComment(comment,decodedToken.uid)); 
         }else {
             throw new ClientError("We only supports: GET, POST",405);

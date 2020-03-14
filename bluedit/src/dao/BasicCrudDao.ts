@@ -82,15 +82,18 @@ abstract class BasicCrudDao<T extends BaseEntity> extends BaseDao implements Cru
      */
     public async findAllByWhere(fieldpath:string | FirebaseFirestore.FieldPath,
                                 opStr:FirebaseFirestore.WhereFilterOp,
-                                value:any):Promise<Array<T>>{
-        return await this.findAllByWheres([{fieldpath,opStr,value}]);
+                                value:any, orderBy?:[string,string]):Promise<Array<T>>{
+        return await this.findAllByWheres([{fieldpath,opStr,value}],orderBy);
     }
 
-    public async findAllByWheres(wheres:Where[]):Promise<Array<T>>{
+    public async findAllByWheres(wheres:Where[], orderBy?:[string,string]):Promise<Array<T>>{
         const result:T[]=[];
         let query:FirebaseFirestore.Query=this.db.collection(this.COLLECTION_NAME);
         for(let w of wheres){
             query=query.where(w.fieldpath,w.opStr,w.value);
+        }
+        if(orderBy!=null){
+            query.orderBy(orderBy[0],orderBy[1] as FirebaseFirestore.OrderByDirection);
         }
         (await (query.get())).forEach(doc=>result.push(doc.data() as T))
         return result;
