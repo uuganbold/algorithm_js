@@ -1,24 +1,25 @@
 import { NextPage } from "next";
 import User from '../../business/entities/User'
 import fetch from 'isomorphic-unfetch';
-import Header from '../components/Header';
-
-
+import Layout from "../../components/layout/Layout";
+import { Col } from "reactstrap";
 
 /**
  * This page shows information about single user.
  */
 const UserPage: NextPage<{ user: User }> = ({ user }) => (
     
-    <div>
-        <Header/>
-        <h4 className="text-info">User Details Page</h4>
-        <div> <p className="text-muted">Username : </p> <p className="text-primary">{user.username}</p></div>
-        <div> <p className="text-muted">Email : </p>  <p className="text-primary">{user.email}</p> </div>
+        <Layout>
+          <Col sm="9" md="6" className="py-md-2" tag="main"> 
+            <h4 className="text-info">User Details Page</h4>
+          <div> <p className="text-muted">Username : </p> <p className="text-primary">{user.username}</p></div>
+          
+          <div> <p className="text-muted">Bio : </p> <p className="text-muted"> {user.bio} </p></div>
+          </Col>
         
-        <div> <p className="text-muted">Bio : </p> <p className="text-muted"> {user.bio} </p></div>
+        </Layout>
+        
 
-    </div>
   );
   
 UserPage.getInitialProps = async (context) => {

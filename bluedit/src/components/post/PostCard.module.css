@@ -1,0 +1,56 @@
+.post {
+    display: flex;
+    flex-direction: row;
+    margin: 20px 0 20px 0;
+}
+
+.post :global .card-header {
+    background-color: rgb(247, 247, 247);
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    padding: 8px 4px 8px 4px;
+}
+
+.post :global .card-body {
+    padding: 5px 5px 5px 5px;
+}
+
+.post :global .card-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.post :global .card-title a {
+    color: #3E3E3E;
+}
+
+.voteButton {
+    height: 24px;
+    width: 24px;
+    background: transparent;
+    border: none;
+    color: inherit;
+    padding: initial;
+}
+
+.user {
+    margin-left: 5px;
+}
+
+.user::before {
+    content: 'Posted by ';
+}
+
+.date {
+    margin-left: 5px;
+}
+
+.toolbar a {
+    color: rgb(156, 156, 156);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 16px;
+    padding: 4px;
+}

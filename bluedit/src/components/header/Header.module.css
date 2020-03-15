@@ -1,0 +1,38 @@
+.navbar {
+    min-height: 4rem;
+    background-color: #4FB7F8;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .05), inset 0 -1px 0 rgba(0, 0, 0, .1)
+}
+
+@media (min-width:768px) {
+    @supports ((position:-webkit-sticky) or (position:sticky)) {
+        .navbar {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            z-index: 1071
+        }
+    }
+}
+
+.navbar :global .navbar-nav :global .nav-link {
+    color: #fff;
+    padding-right: .5rem;
+    padding-left: .5rem;
+}
+
+.navbar :global .navbar-nav :global .nav-link .active {
+    color: #fff;
+    background-color: transparent;
+    font-weight: 500
+}
+
+
+.navbar :global .navbar-nav :global .nav-link:hover {
+    color: rgb(230, 230, 230);
+    background-color: transparent;
+}
+
+.navbar :global .navbar-nav :global .dropdown :global .dropdown-item a {
+    color: '#000'
+}
