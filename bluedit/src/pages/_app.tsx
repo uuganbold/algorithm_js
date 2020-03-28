@@ -10,10 +10,10 @@ import Router from 'next/router';
 // This default export is required in a new `pages/_app.js` file.
 function MyApp({ Component, pageProps }:AppProps) {
 
-  const [logInUser,setLogInUser]=useState();
-  const [loginToken, setLoginToken]=useState();
-  const [loginProfile, setLoginProfile]=useState();
-  const [errors,setErrors]=useState();
+  const [logInUser,setLogInUser]=useState(null);
+  const [loginToken, setLoginToken]=useState(null);
+  const [loginProfile, setLoginProfile]=useState(null);
+  const [errors,setErrors]=useState(null);
 
   const handleLogin=async (user:firebase.User)=>{
       user.getIdToken().then((token)=>{
