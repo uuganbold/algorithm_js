@@ -22,7 +22,7 @@ align-items: center;
     }
 
         .vote button:hover {
-            background-color: #4FB7F8;
+            background-color: #269fff;
             
         }
 
@@ -35,7 +35,7 @@ align-items: center;
     }
 
         .vote .ocButton:hover {
-            background-color: #4FB7F8;
+            background-color: #269fff;
         }
 
 .vote .ocButton:active {

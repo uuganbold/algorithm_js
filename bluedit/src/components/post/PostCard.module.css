@@ -8,8 +8,9 @@
     background-color: rgb(247, 247, 247);
     display: flex;
     flex-direction: column;
-    align-items: baseline;
+    align-items: center;
     padding: 8px 4px 8px 4px;
+ 
 }
 
 .post :global .card-body {
@@ -33,6 +34,10 @@
     border: none;
     color: inherit;
     padding: initial;
+}
+
+.voteButton:hover{
+    background-color: #269fff;
 }
 
 .user {
