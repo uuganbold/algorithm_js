@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useState } from 'react';
 import { Card, CardHeader, CardBody, CardText, CardTitle, CardSubtitle, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp, faArrowDown, faCode, faCommentAlt } from '@fortawesome/free-solid-svg-icons';
@@ -10,15 +10,17 @@ import Link from 'next/link';
 type Props = {
 	post: Post;
 };
+
 const PostCard: FunctionComponent<Props> = ({ post }) => {
+	const [vote, setVote] = useState(0);
 	return (
 		<Card className={styles.post}>
 			<CardHeader>
-				<Button color="secondary" className={styles.voteButton}>
+				<Button color="secondary" className={styles.voteButton} onClick={() => setVote(vote + 1)}>
 					<FontAwesomeIcon icon={faArrowUp} />
 				</Button>
-				<span>93</span>
-				<Button color="secondary" className={styles.voteButton}>
+				<span>{vote}</span>
+				<Button color="secondary" className={styles.voteButton} onClick={() => setVote(vote - 1)}>
 					<FontAwesomeIcon icon={faArrowDown} />
 				</Button>
 			</CardHeader>
