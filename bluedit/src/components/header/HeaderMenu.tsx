@@ -1,7 +1,6 @@
 import { Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
-import { FunctionComponent } from "react";
+import { FunctionComponent, useContext } from "react";
 import Link from "next/link";
-import styles from './HeaderMenu.module.css'
 const HeaderMenu:FunctionComponent=()=>{
     return (
         <Nav navbar>
@@ -15,16 +14,17 @@ const HeaderMenu:FunctionComponent=()=>{
                     <NavLink href='/subbluedits' >Subbluedits</NavLink>
                 </Link>
             </NavItem>
-            <UncontrolledDropdown nav>
+          {<UncontrolledDropdown nav>
                 <DropdownToggle nav caret>
                     Sort By
                 </DropdownToggle>
                 <DropdownMenu>
-                    <DropdownItem >Recent</DropdownItem>
-                    <DropdownItem>Action</DropdownItem>
-                    <DropdownItem>Another Action</DropdownItem>
+                    <DropdownItem >Best</DropdownItem>
+                    <DropdownItem>Top</DropdownItem>
+                    <DropdownItem>Recent</DropdownItem>
+                    <DropdownItem>Old</DropdownItem>
                 </DropdownMenu>
-            </UncontrolledDropdown>
+            </UncontrolledDropdown> }
         </Nav>
     )
 }

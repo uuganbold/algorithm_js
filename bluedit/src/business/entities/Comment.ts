@@ -1,16 +1,20 @@
 import User from "./User";
 import Post from "./Post";
 import BaseEntity from "./BaseEntity";
+import Voteable from "./Voteable";
+import HasDate from "./HasDate";
 
 /**
  * The entity class that holds information about comments. Each instance represents a comment.
  */
-export default interface Comment extends BaseEntity{
+export default interface Comment extends BaseEntity, Voteable,HasDate{
     text:string;
-    post_date:Date;
     user:User;
     postid:string;
     parentid:string;
-    vote:number;
-    children:Comment[];
+}
+
+export interface CommentTreeNode{
+    comment:Comment;
+    children:CommentTreeNode[];
 }

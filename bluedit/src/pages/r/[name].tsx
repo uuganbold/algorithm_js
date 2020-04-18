@@ -38,7 +38,7 @@ const Subdit: NextPage<{ subdit: Subbluedit, initialPosts:Post[] }> = ({ subdit,
                 <Row>
                     <Col>
                         {posts&&(
-                            posts.map(p=><PostCard key={p.uid} post={p}/>)
+                            posts.map(p=><PostCard key={p.uid} post={p} commentCount={p.comment}/>)
                         )}
                     </Col>
                 </Row>

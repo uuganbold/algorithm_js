@@ -1,8 +1,5 @@
 import Layout from "../components/layout/Layout";
 import { Card, Col, CardHeader, ListGroup, ListGroupItem, CardBody, CardSubtitle, CardTitle, CardText } from "reactstrap";
-import { FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faArrowAltCircleUp, faArrowAltCircleDown, faComment} from "@fortawesome/free-solid-svg-icons"
-import {faFacebook} from "@fortawesome/free-brands-svg-icons"
 import PostInput from "../components/post/PostInput";
 import { NextPage } from "next";
 import Post from "../business/entities/Post";
@@ -15,6 +12,7 @@ import _ from "lodash";
 const Index:NextPage<{initialPosts:Post[] }> =({initialPosts})=>{
     const {user}=useContext(UserContext);
     const [posts,setPosts]=useState(initialPosts);
+
     const handlePost=(p:Post)=>{
         posts.unshift(p);
         setPosts(_.cloneDeep(posts));
@@ -28,7 +26,7 @@ const Index:NextPage<{initialPosts:Post[] }> =({initialPosts})=>{
                         )
                     }
                     {posts&&(
-                        posts.map(p=><PostCard key={p.uid} post={p}/>)
+                        posts.map(p=><PostCard key={p.uid} post={p} commentCount={p.comment}/>)
                     )}
             </Col>
             <div className="d-none d-md-block col-md-3 bd-toc py-md-3">

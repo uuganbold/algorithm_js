@@ -30,7 +30,7 @@ abstract class BasicCrudDao<T extends BaseEntity> extends BaseDao implements Cru
             entity.uid=entityRef.id;
         }else entityRef=colRef.doc(entity.uid);
         await entityRef.set(entity);
-        return entity;
+        return (await entityRef.get()).data() as T;
     }
 
     /**

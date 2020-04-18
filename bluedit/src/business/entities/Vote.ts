@@ -1,11 +1,17 @@
 import User from "./User";
-import Post from "./Post"
 import BaseEntity from "./BaseEntity";
 
 /**
  * The entity class that holds the information about post. Each instance represents a post.
  */
-export default interface Vote extends BaseEntity {
-    post: Post;
-    user: User;
+
+export enum VoteDirection {
+    UP=1,
+    DOWN=-1
+}
+
+export default interface Vote {
+    oid: string;
+    user: string;
+    direction:VoteDirection
 }
