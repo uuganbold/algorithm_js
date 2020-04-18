@@ -6,7 +6,7 @@ export const better=(v1:Voteable, v2:Voteable)=>{
 }
 
 export const topper=(v1:Voteable, v2:Voteable)=>{
-    return (v1.upVote-v1.downVote)-(v2.upVote-v2.downVote);
+    return (v2.upVote-v2.downVote)-(v1.upVote-v1.downVote);
 }
 
 export const newer=(v1:HasDate,v2:HasDate)=>{
