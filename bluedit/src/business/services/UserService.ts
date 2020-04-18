@@ -1,9 +1,9 @@
-import UserDao from '../../dao/UserDao'
+import {UserDao} from '../../dao/UserDao'
+import dao from '../../dao/UserDao'
 import User from '../entities/User';
 import ClientError from '../../errors/ClientError';
 
-
-class UserService{
+export class UserService{
 
     /**
      * UserDao: Data acccess object which performs persistency regarding user
@@ -21,14 +21,14 @@ class UserService{
     
     /**
      * Create new user with the object passed by argument.
-     * It rejects creating user when the user's email or username belongs to another user.
+     * It rejects creating user when the user's login uid or username belongs to another user.
      * @param user User to create
      */
     async createUser(user:User):Promise<User>{
-         if(await this.dao.exists(user.username)){
+         if(await this.dao.existsUsername(user.username)){
              throw new ClientError('Username exists. Try another username');
-         }else if(await this.dao.existsEmail(user.email)){
-            throw new ClientError('Email exists. Try another email');
+         }else if(await this.dao.exists(user.uid)){
+            throw new ClientError('Login UID exists. You cannot create another profile.');
          }else
             return await this.dao.save(user);
     }
@@ -36,16 +36,16 @@ class UserService{
     /**
      * Update user information.
      * It rejects to update user when 
-     *  1. The user's email belongs to another user
+     *  1. The user's login uid belongs to another user
      *  2. The user does not exist in our database.
      * @param user User to be updated
      */
     async updateUser(user:User):Promise<User>{
-        const userWithSameEmail=await this.dao.findByEmail(user.email);
-        if(userWithSameEmail!=null&&userWithSameEmail.username!=user.username){
-            throw new ClientError('Email exists. Try another email');
-        }else if(!(await this.dao.exists(user.username))){
-            throw new ClientError('User not exists');
+        const userWithSameUsername=await this.dao.findByUserName(user.username);
+        if(userWithSameUsername!=null&&userWithSameUsername.uid!=user.uid){
+            throw new ClientError('This username belongs to another user. Please choose another one.');
+        }else if(!(await this.dao.exists(user.uid))){
+            throw new ClientError('User not exists',404);
         }else 
             return await this.dao.save(user);
     }
@@ -58,13 +58,21 @@ class UserService{
     }
 
     /**
-     * Retrieve user by it's username.
+     * Retrieve user by it's uid.
      * @param username 
      */
-    async getUser(username:string):Promise<User>{
-        return await this.dao.findOne(username);
+    async getUser(uid:string):Promise<User>{
+        return await this.dao.findOne(uid);
+    }
+
+    async existsUser(uid:string):Promise<boolean>{
+        return await this.dao.exists(uid);
+    }
+
+    async getUserByUsername(username:string):Promise<User>{
+        return await this.dao.findByUserName(username);
     }
 
 }
-
-export default UserService;
+const userService=new UserService(dao);
+export default userService;

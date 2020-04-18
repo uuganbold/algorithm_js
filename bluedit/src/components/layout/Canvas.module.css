@@ -1,0 +1,11 @@
+.canvas {
+    background-color: #f3f9ff;
+    position: fixed;
+    display: block;
+    width: 95%;
+    height: 100%;
+    top: 0;
+    margin-left: 32px;
+    margin-right: 0px;
+    bottom: 0;
+}
