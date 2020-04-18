@@ -93,7 +93,7 @@ const UserCreate:NextPage<{}>=({})=>{
     return (
        
         <div>
-            <Layout>  </Layout>
+            <Layout />
            
            <Form onSubmit={handleSubmit}>
                 

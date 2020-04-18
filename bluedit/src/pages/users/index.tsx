@@ -12,7 +12,7 @@ import Layout from "../components/Layout";
 const UsersPage: NextPage<{ users: User[] }> = ({users}) => (
 
     <div>
-        <Layout>  </Layout>
+        <Layout />
         <h4 className="text-info">All Users.</h4>
         {users.map(user => (
             <div key={user.username}> <Link href={'/users/'+user.username}>{user.username}</Link></div>
