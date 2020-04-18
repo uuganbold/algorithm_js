@@ -1,0 +1,8 @@
+.voteButton {
+    height: 24px;
+    width: 24px;
+    background: transparent;
+    border: none;
+    color: inherit;
+    padding: initial;
+}

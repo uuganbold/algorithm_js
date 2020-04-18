@@ -1,13 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import Context from '../../../config/ApplicationContext'
-import User from "../../../business/entities/User";
-import UserService from "../../../business/services/UserService";
-import validator from 'validator';
 import ClientError from "../../../errors/ClientError";
 import _ from "lodash";
 import resolve_error from "../../../errors/ErrorResolver";
-
-const service: UserService = Context.getInstance().getBean("userService"); //using singleton pattern
+import service from "../../../business/services/UserService"
 /**
  * URI: http://[SERVER]/api/users/
  * METHODS ACCEPTED: GET
@@ -23,7 +18,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             res.json(user);
           //DELETE request has not implemented yet.
         } else {
-            throw new ClientError("We only supports: GET");
+            throw new ClientError("We only supports: GET",405);
         }
     } catch (e) {
         //if error occurs, this function will prepare response.

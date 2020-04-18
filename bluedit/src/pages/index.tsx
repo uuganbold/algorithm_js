@@ -1,131 +1,57 @@
-import React, { useState, Fragment } from 'react';
-import Layout from './components/Layout'
+import Layout from "../components/layout/Layout";
+import { Card, Col, CardHeader, ListGroup, ListGroupItem, CardBody, CardSubtitle, CardTitle, CardText } from "reactstrap";
+import PostInput from "../components/post/PostInput";
 import { NextPage } from "next";
-import Link from "next/link";
-import Post from '../business/entities/Post'
-import fetch from 'isomorphic-unfetch';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faArrowUp, faArrowDown, faCode, faCommentAlt, faAtom } from '@fortawesome/free-solid-svg-icons'
-
-library.add(faArrowUp, faArrowDown, faCode, faCommentAlt, faAtom)
+import Post from "../business/entities/Post";
+import { useState, useContext } from "react";
+import PostCard from "../components/post/PostCard";
+import UserContext from "../components/context/UserContext";
+import _ from "lodash";
 
 
-import {
-    Button,
-    Collapse,
-    Navbar,
-    NavbarToggler,
-    NavbarBrand,
-    Nav,
-    NavItem,
-    NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem,
-    NavbarText,
+const Index:NextPage<{initialPosts:Post[] }> =({initialPosts})=>{
+    const {user}=useContext(UserContext);
+    const [posts,setPosts]=useState(initialPosts);
 
-    Media,
-    FormGroup,
-    Label,
-    Col,
-    Input
-} from 'reactstrap';
+    const handlePost=(p:Post)=>{
+        posts.unshift(p);
+        setPosts(_.cloneDeep(posts));
+   }
+    return (
+        <Layout>
+            <Col sm="9" md="6" className="py-md-2 bd-content" tag="main">
+                    {
+                        user&&(
+                            <PostInput handleSuccessPost={handlePost}/>                    
+                        )
+                    }
+                    {posts&&(
+                        posts.map(p=><PostCard key={p.uid} post={p} commentCount={p.comment}/>)
+                    )}
+            </Col>
+            <div className="d-none d-md-block col-md-3 bd-toc py-md-3">
+                    <Card>
+                        <CardHeader className="bg-primary text-light">Up-and-Coming Communities</CardHeader>
+                        <ListGroup flush>
+                            <ListGroupItem>
+                                    <a href="/">
+                                        <div>
+                                            <span>1</span>
 
-    
-//const Home = () => {
-
-    const Home: NextPage<{ post: Post[] }> = ({ post }) => (
-
-        <Fragment>
-            <Layout/>
-            <div className="canvas"> 
-                
-                    
-            <div className="home-elements">
-                <div className="create-posts">
-                    <span>Create Post</span>
-                    <Input type="textarea" name="text" id="exampleText" />
+                                        </div>
+                                    </a>
+                            </ListGroupItem>
+                        </ListGroup>
+                    </Card>
                 </div>
-            <div className="container-post">
-                <div className="row mt-2">
-                        <div className="col-lg-12 mb-8 grid-margin">
-                        <div className="card h-100">
-                            <div className="example"><Button className="vote-button"> <FontAwesomeIcon icon="arrow-up" /></Button> <span>1.7k</span>
-                                <Button className="vote-button"><FontAwesomeIcon icon="arrow-down" /></Button> </div> 
-                            
-                                <div className="card-body-custom">
-                                    <h4> <a href="/posts/post1" style={{ color:"#3E3E3E"}}>To the try hard LC people </a></h4>
-                                <FontAwesomeIcon icon="code" color="green" /> <span> <a href="">r/thecscareerquestions</a> </span>
-                                <span className="text-muted">Posted by <a href=""><span className="text-muted">u/rayyanshaji </span></a> </span> <span className="text-muted">8 hours ago </span>
-                                <p className="card-text">Thank you,
-                            Genuinely, thank you. A few months back I asked someone in a random thread about what they thought about my situation (good TC but locked into offer from beginning of September) and they recommended that I always keep interviewing Incase I get a better offer.
-I did 200 LC and applied to every big N company on the map, interviewed for months while balancing social life, school, multiple part time jobs.
-                                </p>
-                                <a href="" className="comments-button"> <FontAwesomeIcon icon="comment-alt" /> 24 Comments </a>
-                            </div>
-                          
-                        </div>
-                </div>
-            </div>
-            </div>
+        </Layout>
+    )
+}
 
-            <div className="container-post">
-                <div className="row mt-5">
-                        <div className="col-lg-12 mb-8 grid-margin">
-                        <div className="card h-100">
-                            <div className="example"><Button className="vote-button"> <FontAwesomeIcon icon="arrow-up" /></Button> <span>3.4k</span>
-                                <Button className="vote-button"><FontAwesomeIcon icon="arrow-down" /></Button> </div>
+Index.getInitialProps = async (context) => {
+    const postRes=await fetch(`http://localhost:3000/api/posts`)
+    const initialPosts:Post[]=await postRes.json();
+    return { initialPosts};
+};
 
-                            <div className="card-body-custom">
-                                    <h4> <a href="/pages/api/post2" style={{ color: "#3E3E3E" }}> One dose of Magic Mushroom drug reduces anxiety and depression in cancer patients, study says </a> </h4>
-                                <FontAwesomeIcon icon="atom" color="#CD6155" /> <span> <a href="">r/science</a> </span>
-                                <span className="text-muted">Posted by <a href=""><span className="text-muted">u/weizhang</span></a> </span> <span className="text-muted">8 hours ago </span>
-                                <p className="card-text">Thank you,
-                            I saw a segment about this on 60 Minutes about six months ago. They used what they called "heroic doses." So, high-dose. They used it to treat addiction, anxiety and depression.
-
-Some people had good trips and some had bad. Even those with bad experiences often had good long-term results.
-                                </p>
-                                <a href="" className="comments-button"> <FontAwesomeIcon icon="comment-alt" /> 14 Comments </a>
-                            </div>
-        
-                        </div>
-                    </div>
-                </div>
-            </div>
-                    </div>
-                 
-            </div>
-
-            </Fragment>
-     
-        
-       
-
-      
-
-    );
-
-    Home.getInitialProps = async (context) => {
-        //Reading Post's information from the api. 
-        //For the sake of good design, all network operations should be different layer, but so far it might be too much complexity
-        //URI: http://[SERVER]/Posts/[Postname]
-        const res = await fetch(`http://localhost:3000/api/post`);
-        const post: Post[] = await res.json();
-        return { post };
-    };
-        
-/*Home.propTypes = {
-    light: PropTypes.bool,
-    dark: PropTypes.bool,
-    fixed: PropTypes.string,
-    color: PropTypes.string,
-    role: PropTypes.string,
-    expand: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
-    // pass in custom element to use
-}*/
- 
-export default Home;
-    
+export default Index;
