@@ -1,7 +1,9 @@
 import { Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 import { FunctionComponent, useContext } from "react";
 import Link from "next/link";
+import SortContext from "../context/SortContext";
 const HeaderMenu:FunctionComponent=()=>{
+    const {setSortBy}=useContext(SortContext);
     return (
         <Nav navbar>
             <NavItem>
@@ -14,15 +16,15 @@ const HeaderMenu:FunctionComponent=()=>{
                     <NavLink href='/subbluedits' >Subbluedits</NavLink>
                 </Link>
             </NavItem>
-          {<UncontrolledDropdown nav>
+          {setSortBy&&<UncontrolledDropdown nav>
                 <DropdownToggle nav caret>
                     Sort By
                 </DropdownToggle>
                 <DropdownMenu>
-                    <DropdownItem >Best</DropdownItem>
-                    <DropdownItem>Top</DropdownItem>
-                    <DropdownItem>Recent</DropdownItem>
-                    <DropdownItem>Old</DropdownItem>
+                    <DropdownItem onClick={()=>setSortBy('best')}>Best</DropdownItem>
+                    <DropdownItem onClick={()=>setSortBy('top')}>Top</DropdownItem>
+                    <DropdownItem onClick={()=>setSortBy('new')}>Recent</DropdownItem>
+                    <DropdownItem onClick={()=>setSortBy('old')}>Old</DropdownItem>
                 </DropdownMenu>
             </UncontrolledDropdown> }
         </Nav>
