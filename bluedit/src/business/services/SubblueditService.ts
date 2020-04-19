@@ -6,6 +6,9 @@ import ClientError from "../../errors/ClientError";
 import userService, { UserService }  from "./UserService";
 
 export class SubblueditService {
+    async searchSubdits(q: string): Promise<Subbluedit[]> {
+        return this.dao.findByNamePrefix(q);
+    }
 
     async updateSubdit(subdit: Subbluedit, userUID:string): Promise<Subbluedit> {
         const user=await this.userService.getUser(userUID);
@@ -37,7 +40,7 @@ export class SubblueditService {
         return await this.dao.save(subdit);
     }
 
-    async listSubdits() {
+    async listSubdits() : Promise<Subbluedit[]>{
         return await dao.findAll();
     }
 
