@@ -19,7 +19,7 @@ import PostCard from "../components/post/PostCard";
 import UserContext from "../components/context/UserContext";
 import _ from "lodash";
 import SortContext from "../components/context/SortContext";
-import { better, topper, newer, older } from "../helpers/comparators";
+import { better, topper, newer, older, comment } from "../helpers/comparators";
 import {getState, setState} from "expect/build/jestMatchersObject";
 
 
@@ -51,6 +51,7 @@ const Index:NextPage<{initialPosts:Post[] }> =({initialPosts})=>{
             case 'top': setPosts(_.cloneDeep(posts).sort(topper)); break;
             case 'new': setPosts(_.cloneDeep(posts).sort(newer)); break;
             case 'old': setPosts(_.cloneDeep(posts).sort(older)); break;
+            case 'comment': setPosts(_.cloneDeep(posts).sort(comment)); break;
         }
    },[sortBy]);
     return (

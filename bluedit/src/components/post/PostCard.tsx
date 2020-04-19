@@ -80,7 +80,6 @@ const PostCard: FunctionComponent<Props> = ({ post,commentCount}) => {
 					<a href="/">
 						<FontAwesomeIcon icon={faCommentAlt} /> {commentCount} Comments
 					</a>
-					<Button onclick={copyFunc()}>Copy Url</Button>
 				</div>
 
 			</CardBody>
