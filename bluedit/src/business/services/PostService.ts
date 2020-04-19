@@ -7,6 +7,7 @@ import ClientError from '../../errors/ClientError';
 
 export class PostService {
 
+
     async updatePost(post: Post, userId: string): Promise<Post> {
         const user=await this.userService.getUser(userId);
         if(user==null) throw new ClientError("User login id is invalid");
@@ -47,6 +48,10 @@ export class PostService {
 
     async listPostsBySubdit(subdit:string):Promise<Post[]>{
         return this.fixUpDownVotesOfPosts(await this.dao.findBySubbluedit(subdit));
+    }
+
+    async searchPosts(query: string): Promise<Post[]> {
+        return this.fixUpDownVotesOfPosts(await this.dao.findByName(query));
     }
 
     private fixUpDownVotesOfPost(p:Post):Post{
