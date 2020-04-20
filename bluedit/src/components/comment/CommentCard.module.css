@@ -21,9 +21,18 @@
     border: none;
 }
 
+.vote button.active {
+    background-color: #269fff;
+    color:white;
+}
+
 .vote button:hover {
     background-color: #269fff;
+}
 
+.vote button.active:hover {
+    background-color: transparent;
+    color:#6c6e70;
 }
 
 .vote .ocButton {

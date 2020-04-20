@@ -7,7 +7,7 @@ import HasDate from "./HasDate";
 /**
  * The entity class that holds the information about post. Each instance represents a post.
  */
-export default interface Post extends BaseEntity, Voteable,HasDate{
+export default interface Post extends Voteable,HasDate{
     name:string;
     text:string;
     user:User;

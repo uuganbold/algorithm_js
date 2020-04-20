@@ -40,6 +40,16 @@
     background-color: #269fff;
 }
 
+.voteButton.active{
+    color:white;
+    background-color: #269fff;
+}
+
+.voteButton.active:hover{
+    background: transparent;
+    color:inherit;
+}
+
 .user {
     margin-left: 5px;
 }

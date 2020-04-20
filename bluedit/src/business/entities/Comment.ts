@@ -7,7 +7,7 @@ import HasDate from "./HasDate";
 /**
  * The entity class that holds information about comments. Each instance represents a comment.
  */
-export default interface Comment extends BaseEntity, Voteable,HasDate{
+export default interface Comment extends  Voteable,HasDate{
     text:string;
     user:User;
     postid:string;

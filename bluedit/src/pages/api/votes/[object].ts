@@ -5,6 +5,7 @@ import resolve_error from '../../../errors/ErrorResolver';
 import authToken from '../../../helpers/auth';
 import { postVoteService, commentVoteService, VoteService } from '../../../business/services/VoteService';
 import Vote from '../../../business/entities/Vote';
+import VotesPubSubManager from '../../../helpers/VotesPubSubManager';
 const services=new Map<string,VoteService>();
 services.set("post",postVoteService);
 services.set("comment",commentVoteService);
@@ -18,6 +19,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         if (req.method === 'POST') {
             const v:Vote=JSON.parse(req.body);
             const voted=await services.get(object as string).vote(v,decodedToken.uid);
+            global.pubSubManager.publish(voted);
             res.json(voted);
         }else {
             throw new ClientError("We only supports: POST",405);

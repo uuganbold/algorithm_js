@@ -3,7 +3,6 @@ import ClientError from "../../../errors/ClientError";
 import _ from "lodash";
 import resolve_error from "../../../errors/ErrorResolver";
 import service from "../../../business/services/SubblueditService";
-import userService from "../../../business/services/UserService";
 import Subbluedit from "../../../business/entities/Subbluedit";
 import authToken from "../../../helpers/auth";
 

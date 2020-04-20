@@ -1,5 +1,5 @@
 import Layout from "../components/layout/Layout";
-import { Card, Col, CardHeader, ListGroup, ListGroupItem, CardBody, CardSubtitle, CardTitle, CardText } from "reactstrap";
+import { Card, Col, CardHeader, ListGroup, ListGroupItem} from "reactstrap";
 import PostInput from "../components/post/PostInput";
 import { NextPage } from "next";
 import Post from "../business/entities/Post";
@@ -9,16 +9,64 @@ import UserContext from "../components/context/UserContext";
 import _ from "lodash";
 import SortContext from "../components/context/SortContext";
 import { better, topper, newer, older } from "../helpers/comparators";
+import SocketContext from "../components/context/SocketContext";
+import Vote from "../business/entities/Vote";
 
 
 const Index:NextPage<{initialPosts:Post[] }> =({initialPosts})=>{
-    const {user}=useContext(UserContext);
+    const {token,user}=useContext(UserContext);
     const [sortBy,setSortBy]=useState('best');
     const [posts,setPosts]=useState(initialPosts);
+    const [myVotes,setMyVotes]=useState(new Map())
+    const {socket}=useContext(SocketContext)
 
     const handlePost=(p:Post)=>{
         posts.unshift(p);
         setPosts(_.cloneDeep(posts));
+   }
+
+   useEffect(()=>{
+        if(socket!=null){
+            socket.emit('subscribe',posts.map(p=>p.uid))
+            socket.off('votes')
+            socket.on('votes',(data:any)=>{
+                
+                const newPosts=_.cloneDeep(posts);
+                //@ts-ignore
+                data.forEach(d=>{
+                    newPosts.forEach(np=>{
+                        if(np.uid===d.uid) {np.upVote=d.upVote; np.downVote=d.downVote};
+                    })
+                })
+                setPosts(newPosts);
+            })
+        }
+    },[posts]);
+
+   useEffect(()=>{
+        const func=async ()=>{
+            if(user){
+                const response=await fetch('/api/votes',{
+                    method:'POST',
+                    headers:{
+                        'Authorization':token
+                    },
+                    body:JSON.stringify({comments:[],posts:posts.map(p=>p.uid)})
+                });
+                const p:{oid:string,direction:number}[]=await response.json();
+                const m=new Map();
+                p.forEach(c=>m.set(c.oid,c.direction));
+                setMyVotes(m);
+            }
+        }
+        func();
+   },[posts,user]);
+
+   const handlePostUpdate=(p:Post)=>{
+        setPosts(posts.map(post=>{
+                if(p.uid===post.uid) return p;
+                else return post;
+        }));
    }
 
    useEffect(()=>{
@@ -29,36 +77,53 @@ const Index:NextPage<{initialPosts:Post[] }> =({initialPosts})=>{
             case 'old': setPosts(_.cloneDeep(posts).sort(older)); break;
         }
    },[sortBy]);
-    return (
-        <SortContext.Provider value={{setSortBy}}>
-        <Layout >
-            <Col sm="9" md="6" className="py-md-2 bd-content" tag="main">
-                    {
-                        user&&(
-                            <PostInput handleSuccessPost={handlePost}/>                    
-                        )
-                    }
-                    {posts&&(
-                        posts.map(p=><PostCard key={p.uid} post={p} commentCount={p.comment}/>)
-                    )}
-            </Col>
-            <div className="d-none d-md-block col-md-3 bd-toc py-md-3">
-                    <Card>
-                        <CardHeader className="bg-primary text-light">Up-and-Coming Communities</CardHeader>
-                        <ListGroup flush>
-                            <ListGroupItem>
-                                    <a href="/">
-                                        <div>
-                                            <span>1</span>
 
-                                        </div>
-                                    </a>
-                            </ListGroupItem>
-                        </ListGroup>
-                    </Card>
-                </div>
-        </Layout>
-        </SortContext.Provider>
+
+   const sendVote=async (post:Post,v:Vote)=>{
+        const response=await fetch('/api/votes/post',{
+            method:'POST',
+            headers:{
+                'Authorization':token
+            },
+            body:JSON.stringify(v)
+        });
+        const p=await response.json();
+        handlePostUpdate(p);
+    }
+
+    return (
+            <SortContext.Provider value={{setSortBy}}>
+                <Layout >
+                    <Col sm="9" md="6" className="py-md-2 bd-content" tag="main">
+                            {
+                                user&&(
+                                    <PostInput handleSuccessPost={handlePost}/>                    
+                                )
+                            }
+                            {
+                                posts&&(
+                                    posts.map(p=><PostCard key={p.uid} post={p} commentCount={p.comment} voteDirection={myVotes.get(p.uid)} sendVote={sendVote}/>)
+                                )
+                            }
+                    </Col>
+                    <div className="d-none d-md-block col-md-3 bd-toc py-md-3">
+                            <Card>
+                                <CardHeader className="bg-primary text-light">Up-and-Coming Communities</CardHeader>
+                                <ListGroup flush>
+                                    <ListGroupItem>
+                                            <a href="/">
+                                                <div>
+                                                    <span>1</span>
+
+                                                </div>
+                                            </a>
+                                    </ListGroupItem>
+                                </ListGroup>
+                            </Card>
+                        </div>
+                </Layout>
+                </SortContext.Provider>
+        
     )
 }
 

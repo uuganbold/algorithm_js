@@ -19,6 +19,10 @@ export class VoteService {
         this.voteableDao = voteableDao;
     }
 
+    public async getVotes(oids:string[],userId:string):Promise<Vote[]>{
+        return this.dao.findAllByObjectIds(oids,userId);
+    }
+
     public async vote(vote:Vote,userId:string):Promise<Voteable>{
         const user=await this.userDao.findOne(userId);
         if(user==null) throw new ClientError("User login id is invalid");
@@ -34,8 +38,8 @@ export class VoteService {
         if(oldVote==null){
             if(vote.direction==VoteDirection.UP) voteable.upVote=(voteable.upVote)+1;
             else voteable.downVote=(voteable.downVote)+1;
-            await this.voteableDao.save(voteable);
-            vote=await this.dao.save(vote);
+            this.voteableDao.save(voteable);
+            this.dao.save(vote);
         }else if(oldVote.direction!==vote.direction){
             if(vote.direction==VoteDirection.UP){
                 voteable.upVote=(voteable.upVote)+1;
@@ -44,14 +48,14 @@ export class VoteService {
                 voteable.upVote-=1;
                 voteable.downVote=(voteable.downVote)+1;
             }
-            await this.voteableDao.save(voteable);
-            await this.dao.delete(oldVote);
-            vote=await this.dao.save(vote);
+            this.voteableDao.save(voteable);
+            this.dao.delete(oldVote);
+            this.dao.save(vote);
         }else{
             if(vote.direction==VoteDirection.UP) voteable.upVote-=1;
             else voteable.downVote-=1;
-            await this.voteableDao.save(voteable);
-            await this.dao.delete(oldVote);
+            this.voteableDao.save(voteable);
+            this.dao.delete(oldVote);
         }
         
         return voteable;

@@ -34,4 +34,16 @@ export default class VoteDao extends BaseDao{
         if(snapshot.empty) return;
         else snapshot.docs.forEach(d=>d.ref.delete());
     }
+
+    public async findAllByObjectIds(objectIds:string[],userId:string):Promise<Vote[]>{
+        const result:Vote[]=[];
+        const colRef=this.db.collection(this.COLLECTION_NAME);
+        let i=0;
+        while(i<objectIds.length){
+            const ids=objectIds.slice(i,i+10);
+            (await colRef.where('oid','in',ids).where('user','==',userId).get()).forEach(doc=>result.push(doc.data() as Vote));
+            i+=10;
+        }
+        return result;
+    };
 }

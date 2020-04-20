@@ -12,12 +12,18 @@ import _ from 'lodash';
 import Vote, { VoteDirection } from '../../business/entities/Vote';
 import UserContext from '../context/UserContext';
 
-const CommentCard: FunctionComponent<{ node: CommentTreeNode, post: Post, handleComment:(c:Comment)=>void}> = ({ node, post, handleComment }) => {
-	const comment=node.comment;
+const CommentCard: FunctionComponent<{
+	node: CommentTreeNode;
+	post: Post;
+	handleComment: (c: Comment) => void;
+	myVotes: Map<string, number>;
+	sendVote: (vote: Vote) => void;
+}> = ({ node, post, handleComment, myVotes, sendVote }) => {
+
+	const comment = node.comment;
 	const [isOpen, setIsOpen] = useState(true);
 	const [isReply, setIsReply] = useState(false);
-	const [vote,setVote]=useState((comment.upVote)-(comment.downVote));
-	const {token,profile}=useContext(UserContext)
+	const { token, profile } = useContext(UserContext);
 
 	const toggleOpen = () => {
 		setIsOpen(!isOpen);
@@ -29,41 +35,27 @@ const CommentCard: FunctionComponent<{ node: CommentTreeNode, post: Post, handle
 
 	const handleReply = (reply: Comment) => {
 		toggleReply();
-		handleComment(reply);	
-    };
-    
-     const childChange=(child:Comment)=>{
+		handleComment(reply);
+	};
+
+	const childChange = (child: Comment) => {
 		handleComment(child);
-	} 
-	
-	const sendVote=(vote:Vote)=>{
-		fetch('/api/votes/comment',{
-            method:'POST',
-            headers:{
-                'Authorization':token
-			},
-			body:JSON.stringify(vote)
-        }).then(async response=>{
-            return response.json();
-        }).then(p=>{
-            setVote((p.upVote)-(p.downVote));
-        });
-	}
+	};
 
-	const upVote=()=>{
-		sendVote({oid:comment.uid,direction:VoteDirection.UP,user:profile.uid})
-	}
+	const upVote = () => {
+		sendVote({ oid: comment.uid, direction: VoteDirection.UP, user: profile.uid });
+	};
 
-	const downVote=()=>{
-		sendVote({oid:comment.uid,direction:VoteDirection.DOWN,user:profile.uid})
-	}
+	const downVote = () => {
+		sendVote({ oid: comment.uid, direction: VoteDirection.DOWN, user: profile.uid });
+	};
 
 	const source = (
 		<div className={styles.source}>
 			<Link href="/u/[username] " as={`/u/${comment.user.username}`} passHref>
 				<a>{comment.user.username}</a>
 			</Link>
-			<span className={styles.voteCount}>{vote} points</span>
+			<span className={styles.voteCount}>{comment.upVote - comment.downVote} points</span>
 			<Moment date={comment.post_date} />
 		</div>
 	);
@@ -72,10 +64,10 @@ const CommentCard: FunctionComponent<{ node: CommentTreeNode, post: Post, handle
 		return (
 			<div className={styles.comment}>
 				<div className={styles.vote}>
-					<Button onClick={upVote}>
+					<Button onClick={upVote} className={myVotes.get(comment.uid)===1?styles.active:''}>
 						<FontAwesomeIcon icon={faArrowUp} />
 					</Button>
-					<Button onClick={downVote}>
+					<Button onClick={downVote} className={myVotes.get(comment.uid)===-1?styles.active:''}>
 						<FontAwesomeIcon icon={faArrowDown} />
 					</Button>
 					<Button className={styles.ocButton} onClick={toggleOpen}>
@@ -93,7 +85,9 @@ const CommentCard: FunctionComponent<{ node: CommentTreeNode, post: Post, handle
 					{isReply && <CommentInput post={post} parent={comment} handleSuccess={handleReply} />}
 					{node.children &&
 						node.children.length > 0 &&
-						node.children.map(child => <CommentCard key={child.comment.uid} post={post} node={child} handleComment={childChange}/>)}
+						node.children.map((child) => (
+							<CommentCard key={child.comment.uid} post={post} node={child} handleComment={childChange} myVotes={myVotes} sendVote={sendVote} />
+						))}
 				</div>
 			</div>
 		);
@@ -105,9 +99,7 @@ const CommentCard: FunctionComponent<{ node: CommentTreeNode, post: Post, handle
 						<FontAwesomeIcon icon={faPlus} />
 					</Button>
 				</div>
-				<div className={styles.body}>
-                    {source}
-                </div>
+				<div className={styles.body}>{source}</div>
 			</div>
 		);
 	}
