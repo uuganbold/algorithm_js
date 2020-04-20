@@ -11,7 +11,7 @@ import _ from "lodash";
 import PostCard from "../../components/post/PostCard";
 import fetch from 'isomorphic-unfetch'
 import SortContext from "../../components/context/SortContext";
-import { better, newer, older, topper } from "../../helpers/comparators";
+import { better, newer, older, topper, comment } from "../../helpers/comparators";
 
 const Subdit: NextPage<{ subdit: Subbluedit, initialPosts:Post[] }> = ({ subdit,initialPosts }) => {
     const [posts,setPosts]=useState(initialPosts);
@@ -28,6 +28,7 @@ const Subdit: NextPage<{ subdit: Subbluedit, initialPosts:Post[] }> = ({ subdit,
             case 'top': setPosts(_.cloneDeep(posts).sort(topper)); break;
             case 'new': setPosts(_.cloneDeep(posts).sort(newer)); break;
             case 'old': setPosts(_.cloneDeep(posts).sort(older)); break;
+            case 'comment': setPosts(_.cloneDeep(posts).sort(comment)); break;
         }
     },[sortBy])
     return(

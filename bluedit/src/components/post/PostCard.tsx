@@ -9,16 +9,15 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import UserContext from '../context/UserContext';
 import Vote, { VoteDirection } from '../../business/entities/Vote';
+// import FB from 'FB';
 type Props = {
 	post: Post;
 	commentCount:number;
 };
 
-const PostCard: FunctionComponent<Props> = ({ post,commentCount }) => {
+const PostCard: FunctionComponent<Props> = ({ post,commentCount}) => {
 	const [vote,setVote]=useState(post.upVote-post.downVote);
 	const {token,profile}=useContext(UserContext)
-	
-
 	const sendVote=(vote:Vote)=>{
 		fetch('/api/votes/post',{
             method:'POST',
@@ -39,6 +38,10 @@ const PostCard: FunctionComponent<Props> = ({ post,commentCount }) => {
 
 	const downVote=()=>{
 		sendVote({oid:post.uid,direction:VoteDirection.DOWN,user:profile.uid})
+	}
+
+	const copyFunc=()=>{
+		console.log()
 	}
 	return (
 		<Card className={styles.post}>
@@ -78,6 +81,7 @@ const PostCard: FunctionComponent<Props> = ({ post,commentCount }) => {
 						<FontAwesomeIcon icon={faCommentAlt} /> {commentCount} Comments
 					</a>
 				</div>
+
 			</CardBody>
 		</Card>
 	);

@@ -1,6 +1,6 @@
 {
 	"name": "bluedit",
-	"version": "1.0.0",
+	"version": "1.21.1",
 	"description": "Reddit clone",
 	"main": "index.js",
 	"license": "MIT",
