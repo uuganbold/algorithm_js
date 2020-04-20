@@ -25,6 +25,7 @@ const HeaderMenu:FunctionComponent=()=>{
                     <DropdownItem onClick={()=>setSortBy('top')}>Top</DropdownItem>
                     <DropdownItem onClick={()=>setSortBy('new')}>Recent</DropdownItem>
                     <DropdownItem onClick={()=>setSortBy('old')}>Old</DropdownItem>
+                    <DropdownItem onClick={()=>setSortBy('comment')}>Comment</DropdownItem>
                 </DropdownMenu>
             </UncontrolledDropdown> }
         </Nav>

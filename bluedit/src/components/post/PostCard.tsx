@@ -9,6 +9,7 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import UserContext from '../context/UserContext';
 import Vote, { VoteDirection } from '../../business/entities/Vote';
+// import FB from 'FB';
 type Props = {
 	post: Post;
 	commentCount:number;
@@ -25,6 +26,10 @@ const PostCard: FunctionComponent<Props> = ({ post,commentCount,voteDirection,se
 
 	const downVote=()=>{
 		sendVote(post,{oid:post.uid,direction:VoteDirection.DOWN,user:profile.uid})
+	}
+
+	const copyFunc=()=>{
+		console.log()
 	}
 	return (
 		<Card className={styles.post}>
@@ -64,6 +69,7 @@ const PostCard: FunctionComponent<Props> = ({ post,commentCount,voteDirection,se
 						<FontAwesomeIcon icon={faCommentAlt} /> {commentCount} Comments
 					</a>
 				</div>
+
 			</CardBody>
 		</Card>
 	);

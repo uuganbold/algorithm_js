@@ -1,5 +1,16 @@
 import Layout from "../components/layout/Layout";
-import { Card, Col, CardHeader, ListGroup, ListGroupItem} from "reactstrap";
+import {
+    Card,
+    Col,
+    CardHeader,
+    ListGroup,
+    ListGroupItem,
+    CardBody,
+    CardSubtitle,
+    CardTitle,
+    CardText,
+    Button, Alert
+} from "reactstrap";
 import PostInput from "../components/post/PostInput";
 import { NextPage } from "next";
 import Post from "../business/entities/Post";
@@ -8,9 +19,12 @@ import PostCard from "../components/post/PostCard";
 import UserContext from "../components/context/UserContext";
 import _ from "lodash";
 import SortContext from "../components/context/SortContext";
-import { better, topper, newer, older } from "../helpers/comparators";
+import { better, topper, newer, older, comment } from "../helpers/comparators";
 import SocketContext from "../components/context/SocketContext";
 import Vote from "../business/entities/Vote";
+
+
+
 
 
 const Index:NextPage<{initialPosts:Post[] }> =({initialPosts})=>{
@@ -19,6 +33,17 @@ const Index:NextPage<{initialPosts:Post[] }> =({initialPosts})=>{
     const [posts,setPosts]=useState(initialPosts);
     const [myVotes,setMyVotes]=useState(new Map())
     const {socket}=useContext(SocketContext)
+
+    const [text,setText]=useState('Join In');
+
+    const handleTextChange = ()=>{
+        if(text == 'Join In') {
+            alert("You are now joined to learntocode!") ;
+        } else {
+            alert("already Joined") ;
+        }
+        setText('Joined');
+    };
 
     const handlePost=(p:Post)=>{
         posts.unshift(p);
@@ -75,6 +100,7 @@ const Index:NextPage<{initialPosts:Post[] }> =({initialPosts})=>{
             case 'top': setPosts(_.cloneDeep(posts).sort(topper)); break;
             case 'new': setPosts(_.cloneDeep(posts).sort(newer)); break;
             case 'old': setPosts(_.cloneDeep(posts).sort(older)); break;
+            case 'comment': setPosts(_.cloneDeep(posts).sort(comment)); break;
         }
    },[sortBy]);
 
@@ -110,14 +136,23 @@ const Index:NextPage<{initialPosts:Post[] }> =({initialPosts})=>{
                             <Card>
                                 <CardHeader className="bg-primary text-light">Up-and-Coming Communities</CardHeader>
                                 <ListGroup flush>
-                                    <ListGroupItem>
-                                            <a href="/">
-                                                <div>
-                                                    <span>1</span>
-
-                                                </div>
-                                            </a>
-                                    </ListGroupItem>
+                                <ListGroupItem>
+                                <div>
+                                    <span>learntocode</span>
+                                    <br/>
+                                    <text>A group for members who are looking for advice on coding and posts related to it</text>
+                                    <br/>
+                                    <br/>
+                                    <text>1.3K</text>
+                                    <br/>
+                                    <text>Members</text>
+                                    <br/>
+                                    <text>Created on Sep 28, 2012</text>
+                                    <br/>
+                                    <br/>
+                                    <Button onClick={handleTextChange}>{text}</Button>
+                                </div>
+                            </ListGroupItem>
                                 </ListGroup>
                             </Card>
                         </div>

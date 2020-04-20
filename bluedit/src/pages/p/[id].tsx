@@ -10,7 +10,7 @@ import Comment, {CommentTreeNode} from '../../business/entities/Comment';
 import CommentCard from '../../components/comment/CommentCard';
 import _ from 'lodash';
 import fetch from 'isomorphic-unfetch'
-import { better, topper, newer, older } from '../../helpers/comparators';
+import { better, topper, newer, older, user } from '../../helpers/comparators';
 import { DateLike } from '../../business/entities/HasDate';
 import SocketContext from '../../components/context/SocketContext';
 import Vote from '../../business/entities/Vote';
@@ -107,6 +107,7 @@ const PostPage: NextPage<{ post: Post; initialComments: Comment[] }> = ({ post, 
 			case 'top': sortComments(topper); break;
 			case 'new': sortComments(newer); break;
 			case 'old': sortComments(older); break;
+			case 'user': sortComments(user); break;
 		}
 	}
 
@@ -145,6 +146,7 @@ const PostPage: NextPage<{ post: Post; initialComments: Comment[] }> = ({ post, 
 						<option value='top'>Top</option>
 						<option value='new'>New</option>
 						<option value='old'>Old</option>
+						<option value='user'>User</option>
 					</select>
 				</div>
 				{createCommentTree(comments).map((node,uid) => (
