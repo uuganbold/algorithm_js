@@ -5,6 +5,7 @@ import Layout from '../components/layout/Layout';
 import Subbluedit from '../business/entities/Subbluedit';
 import { Col, ListGroup, ListGroupItem } from 'reactstrap';
 import { CSSProperties } from 'react';
+import { server } from '../config';
 
 const style={
     toolbar:{
@@ -43,7 +44,7 @@ SubblueditPage.getInitialProps = async context => {
 	//Reading user's information from the api.
 	//For the sake of good design, all network operations should be different layer, but so far it might be too much complexity
 	//URI: http://[SERVER]/subbluedits/[username]
-	const res = await fetch(`http://localhost:3000/api/subbluedits`);
+	const res = await fetch(`${server}/api/subbluedits`);
 	const subdits: Subbluedit[] = await res.json();
 	return { subdits: subdits };
 };

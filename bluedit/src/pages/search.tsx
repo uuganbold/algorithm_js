@@ -10,6 +10,7 @@ import { Col } from "reactstrap";
 import PostCard from "../components/post/PostCard";
 import SocketContext from "../components/context/SocketContext";
 import Vote from "../business/entities/Vote";
+import { server } from "../config";
 
 const Search:NextPage<{initialPosts:Post[] }> =({initialPosts})=>{
     const {token,user}=useContext(UserContext);
@@ -100,7 +101,7 @@ const Search:NextPage<{initialPosts:Post[] }> =({initialPosts})=>{
 
 Search.getInitialProps = async (context) => {
     const {q}=context.query;
-    const postRes=await fetch(`http://localhost:3000/api/posts?q=${q}`)
+    const postRes=await fetch(`${server}/api/posts?q=${q}`)
     const initialPosts:Post[]=await postRes.json();
     return { initialPosts};
 };

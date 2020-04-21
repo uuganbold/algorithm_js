@@ -14,6 +14,7 @@ import { better, topper, newer, older, user } from '../../helpers/comparators';
 import { DateLike } from '../../business/entities/HasDate';
 import SocketContext from '../../components/context/SocketContext';
 import Vote from '../../business/entities/Vote';
+import { server } from '../../config';
 
 const createCommentTree=(comments:Comment[]):CommentTreeNode[]=>{
 	const commentMap=new Map<string,CommentTreeNode>();
@@ -158,10 +159,10 @@ const PostPage: NextPage<{ post: Post; initialComments: Comment[] }> = ({ post, 
 };
 
 PostPage.getInitialProps = async context => {
-	const res = await fetch(`http://localhost:3000/api/posts/${context.query.id}`);
+	const res = await fetch(`${server}/api/posts/${context.query.id}`);
 	const post: Post = await res.json();
 	const initialComments: Comment[] = await (
-		await fetch(`http://localhost:3000/api/posts/${post.uid}/comments`)
+		await fetch(`${server}/api/posts/${post.uid}/comments`)
 	).json();
 	return { post, initialComments };
 };

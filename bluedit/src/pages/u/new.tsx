@@ -6,6 +6,7 @@ import Router from 'next/router';
 import { Button, Form, FormGroup, Label, Input, FormText, Col } from 'reactstrap';
 import Layout from '../../components/layout/Layout';
 import UserContext from '../../components/context/UserContext';
+import { server } from '../../config';
 
 /**
  * This page shows a form to create new user
@@ -46,7 +47,7 @@ const UserCreate: NextPage<{}> = ({}) => {
 			//@ts-ignore
 			const profile: User = { username: username, bio: bio, photoURL: user.photoURL };
 			//TODO for the sake of good design, all network access should be put in different layer.
-			fetch(`http://localhost:3000/api/users/${username}`, {
+			fetch(`${server}/api/users/${username}`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',

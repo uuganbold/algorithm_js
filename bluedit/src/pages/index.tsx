@@ -22,6 +22,7 @@ import SortContext from "../components/context/SortContext";
 import { better, topper, newer, older, comment } from "../helpers/comparators";
 import SocketContext from "../components/context/SocketContext";
 import Vote from "../business/entities/Vote";
+import { server } from "../config";
 
 
 
@@ -163,7 +164,7 @@ const Index:NextPage<{initialPosts:Post[] }> =({initialPosts})=>{
 }
 
 Index.getInitialProps = async (context) => {
-    const postRes=await fetch(`http://localhost:3000/api/posts`)
+    const postRes=await fetch(`${server}/api/posts`)
     const initialPosts:Post[]=await postRes.json();
     return { initialPosts};
 };

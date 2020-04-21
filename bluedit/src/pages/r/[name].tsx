@@ -14,6 +14,7 @@ import SortContext from '../../components/context/SortContext';
 import { better, newer, older, topper,comment } from '../../helpers/comparators';
 import SocketContext from '../../components/context/SocketContext';
 import Vote from '../../business/entities/Vote';
+import { server } from '../../config';
 
 const Subdit: NextPage<{ subdit: Subbluedit; initialPosts: Post[] }> = ({ subdit, initialPosts }) => {
 	const [posts, setPosts] = useState(initialPosts);
@@ -150,9 +151,9 @@ Subdit.getInitialProps = async (context) => {
 	//Reading user's information from the api.
 	//For the sake of good design, all network operations should be different layer, but so far it might be too much complexity
 	//URI: http://[SERVER]/subbluedits/[name]
-	const res = await fetch(`http://localhost:3000/api/subbluedits/${context.query.name}`);
+	const res = await fetch(`${server}/api/subbluedits/${context.query.name}`);
 	const subdit: Subbluedit = await res.json();
-	const postRes = await fetch(`http://localhost:3000/api/posts?subbluedit=${subdit.uid}`);
+	const postRes = await fetch(`${server}/api/posts?subbluedit=${subdit.uid}`);
 	const initialPosts: Post[] = await postRes.json();
 	return { subdit, initialPosts };
 };

@@ -34,7 +34,7 @@ const NewSubdits = () => {
 			//@ts-ignore
 			const subdit: Subbluedit = { name: name };
 			//TODO for the sake of good design, all network access should be put in different layer.
-			fetch(`http://localhost:3000/api/subbluedits`, {
+			fetch(`/api/subbluedits`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
