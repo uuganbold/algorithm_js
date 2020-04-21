@@ -21,10 +21,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             let post;
             const subdit=req.query.subbluedit as string;
             const user=req.query.user as string;
+            const q=req.query.q as string;
             if(subdit!=null){
                 post=await service.listPostsBySubdit(subdit);
             }else if(user!=null){
                 post=await service.listPostsByUser(user);
+            }else if(q!=null){
+                post=await service.searchPosts(q);
             }else post=await service.listPosts(); 
             res.json(post);
         }else if(req.method==='POST'){

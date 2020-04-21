@@ -14,6 +14,13 @@ const COLLECTION_NAME="subbluedit";
  * It implements @see CrudDao which defines basic CRUD (Create Read Update Delete) operations.
  */
 export class SubblueditDao extends BasicCrudDao<Subbluedit>{
+    findByNamePrefix(query: string):  Promise<Subbluedit[]> {
+        if(query.length==0) return new Promise((res,rej)=>res([]));
+        const end=query.substring(0,query.length-1)+String.fromCharCode(query.charCodeAt(query.length-1)+1);
+        return this.findAllByWheres([
+            {fieldpath:'name',opStr:'>=',value:query},
+            {fieldpath:'name',opStr:'<',value:end}]);
+    }
     public async findByName(name: string):Promise<Subbluedit>{
         let colRef=await this.db.collection(this.COLLECTION_NAME).where('name','==',name).get();
         return colRef.docs.length>0?colRef.docs[0].data() as Subbluedit:null;

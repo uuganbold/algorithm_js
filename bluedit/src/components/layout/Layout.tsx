@@ -10,7 +10,7 @@ const Layout: FunctionComponent<Props>=({children})=> {
 
     return (
           <div>
-              <Header/>
+            <Header/>
               <Canvas/>
               <Container fluid>
                 {errors&&(

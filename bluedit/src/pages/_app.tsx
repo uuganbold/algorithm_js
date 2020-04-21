@@ -7,18 +7,22 @@ import firebase from  'firebase/app';
 import clientCredentials from '../firebase/client'
 import "firebase/auth";
 import Router from 'next/router';
+import SocketContext from '../components/context/SocketContext';
+import io from 'socket.io-client'
 // This default export is required in a new `pages/_app.js` file.
 function MyApp({ Component, pageProps }:AppProps) {
 
-  const [logInUser,setLogInUser]=useState();
-  const [loginToken, setLoginToken]=useState();
-  const [loginProfile, setLoginProfile]=useState();
-  const [errors,setErrors]=useState();
+  const [logInUser,setLogInUser]=useState(null);
+  const [loginToken, setLoginToken]=useState(null);
+  const [loginProfile, setLoginProfile]=useState(null);
+  const [errors,setErrors]=useState(null);
+  const [socket,setSocket]=useState(null);
 
   const handleLogin=async (user:firebase.User)=>{
       user.getIdToken().then((token)=>{
-        setLogInUser(user);
         setLoginToken(JSON.stringify(token));
+        setLogInUser(user);
+       
 
         fetch('/api/auth/profile?uid='+user.uid,{
           headers:{
@@ -47,6 +51,7 @@ function MyApp({ Component, pageProps }:AppProps) {
   }
 
   useEffect(()=>{
+      setSocket(io())
       firebase.initializeApp(clientCredentials);
       firebase.auth().onAuthStateChanged(async user => {
         if (user) {
@@ -76,9 +81,11 @@ function MyApp({ Component, pageProps }:AppProps) {
   }
 
   return (
-      <UserContext.Provider value={contextValue}>
-        <Component {...pageProps} />
-      </UserContext.Provider>
+    <SocketContext.Provider value={{socket}}>
+        <UserContext.Provider value={contextValue}>
+          <Component {...pageProps} />
+        </UserContext.Provider>
+    </SocketContext.Provider>   
   )
 }
 

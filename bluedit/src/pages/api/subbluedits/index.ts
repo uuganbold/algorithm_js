@@ -3,7 +3,6 @@ import ClientError from "../../../errors/ClientError";
 import _ from "lodash";
 import resolve_error from "../../../errors/ErrorResolver";
 import service from "../../../business/services/SubblueditService";
-import userService from "../../../business/services/UserService";
 import Subbluedit from "../../../business/entities/Subbluedit";
 import authToken from "../../../helpers/auth";
 
@@ -16,7 +15,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     try {
         if (req.method === 'GET') {
             //GET request meaning to retrieve information
-            const subdits = await service.listSubdits(); //javascrpt object
+            const q=req.query.q;
+            let subdits;
+            if(q!=null){
+                subdits=await service.searchSubdits(q as string);
+            }else subdits = await service.listSubdits(); //javascrpt object
             res.json(subdits);
           //DELETE request has not implemented yet.
         }else if(req.method==='POST'){

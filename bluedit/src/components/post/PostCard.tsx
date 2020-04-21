@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent, useState, useContext } from 'react';
 import { Card, CardHeader, CardBody, CardText, CardTitle, CardSubtitle, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp, faArrowDown, faCode, faCommentAlt } from '@fortawesome/free-solid-svg-icons';
@@ -7,20 +7,38 @@ import Moment from './Moment';
 import styles from './PostCard.module.css';
 import classNames from 'classnames';
 import Link from 'next/link';
+import UserContext from '../context/UserContext';
+import Vote, { VoteDirection } from '../../business/entities/Vote';
+// import FB from 'FB';
 type Props = {
 	post: Post;
+	commentCount:number;
+	voteDirection:number;
+	sendVote:(post:Post,v:Vote)=>void
 };
 
-const PostCard: FunctionComponent<Props> = ({ post }) => {
-	const [vote, setVote] = useState(0);
+const PostCard: FunctionComponent<Props> = ({ post,commentCount,voteDirection,sendVote}) => {
+	const {profile}=useContext(UserContext)
+	
+	const upVote=()=>{
+		sendVote(post,{oid:post.uid,direction:VoteDirection.UP,user:profile.uid})
+	}
+
+	const downVote=()=>{
+		sendVote(post,{oid:post.uid,direction:VoteDirection.DOWN,user:profile.uid})
+	}
+
+	const copyFunc=()=>{
+		console.log()
+	}
 	return (
 		<Card className={styles.post}>
 			<CardHeader>
-				<Button color="secondary" className={styles.voteButton} onClick={() => setVote(vote + 1)}>
-					<FontAwesomeIcon icon={faArrowUp} />
+				<Button color="secondary" className={classNames(styles.voteButton,voteDirection===VoteDirection.UP?styles.active:'')}  onClick={upVote}>
+					<FontAwesomeIcon icon={faArrowUp}/>
 				</Button>
-				<span>{vote}</span>
-				<Button color="secondary" className={styles.voteButton} onClick={() => setVote(vote - 1)}>
+				<span>{post.upVote-post.downVote}</span>
+				<Button color="secondary" className={classNames(styles.voteButton,voteDirection===VoteDirection.DOWN?styles.active:'')} onClick={downVote}>
 					<FontAwesomeIcon icon={faArrowDown} />
 				</Button>
 			</CardHeader>
@@ -48,9 +66,10 @@ const PostCard: FunctionComponent<Props> = ({ post }) => {
 				<CardText>{post.text}</CardText>
 				<div className={styles.toolbar}>
 					<a href="/">
-						<FontAwesomeIcon icon={faCommentAlt} /> 57 Comments
+						<FontAwesomeIcon icon={faCommentAlt} /> {commentCount} Comments
 					</a>
 				</div>
+
 			</CardBody>
 		</Card>
 	);

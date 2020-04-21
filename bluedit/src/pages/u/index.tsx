@@ -8,7 +8,6 @@ import Layout from "../../components/layout/Layout";
  * This page shows information about single user.
  */
 const UsersPage: NextPage<{ users: User[] }> = ({users}) => (
-
     <Layout>
         <h4 className="text-info">All Users.</h4>
         {users.map(user => (
