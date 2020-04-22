@@ -4,6 +4,10 @@
     margin: 20px 0 20px 0;
 }
 
+    .post:hover {
+        border: 1px solid #269fff;
+    }
+
 .post :global .card-header {
     background-color: rgb(247, 247, 247);
     display: flex;
@@ -27,7 +31,7 @@
     color: #3E3E3E;
 }
 
-.voteButton {
+.voteButtonUp {
     height: 24px;
     width: 24px;
     background: transparent;
@@ -36,18 +40,43 @@
     padding: initial;
 }
 
-.voteButton:hover{
-    background-color: #269fff;
+.voteButtonDown {
+    height: 24px;
+    width: 24px;
+    background: transparent;
+    border: none;
+    color: inherit;
+    padding: initial;
 }
 
-.voteButton.active{
+
+
+.voteButtonUp:hover {
+    background-color: green;
+}
+
+.voteButtonDown:hover {
+    background-color: darkred;
+}
+
+.voteButtonUp.active{
     color:white;
     background-color: #269fff;
 }
 
-.voteButton.active:hover{
+.voteButtonDown.active {
+    color: white;
+    background-color: #269fff;
+}
+
+.voteButtonUp.active:hover{
     background: transparent;
     color:inherit;
+}
+
+.voteButtonDown.active:hover {
+    background: transparent;
+    color: inherit;
 }
 
 .user {

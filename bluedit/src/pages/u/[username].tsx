@@ -11,10 +11,10 @@ const UserPage: NextPage<{ user: User }> = ({ user }) => (
     
         <Layout>
           <Col sm="9" md="6" className="py-md-2" tag="main"> 
-            <h4 className="text-info">User Details Page</h4>
-          <div> <p className="text-muted">Username : </p> <p className="text-primary">{user.username}</p></div>
+            <h4 className="text-primary">User Details Page</h4>
+            <div> <b className="text-dark">Username : </b> <p className="text-dark">{user.username}</p></div>
           
-          <div> <p className="text-muted">Bio : </p> <p className="text-muted"> {user.bio} </p></div>
+            <div> <b className="text-dark">Bio : </b> <p className="text-dark"> {user.bio} </p></div>
           </Col>
         
         </Layout>
