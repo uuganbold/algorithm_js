@@ -36,17 +36,21 @@ const Subdit: NextPage<{ subdit: Subbluedit; initialPosts: Post[] }> = ({ subdit
 			);
 			socket.off('votes');
 			socket.on('votes', (data: any) => {
-				const newPosts = _.cloneDeep(posts);
-				//@ts-ignore
-				data.forEach((d) => {
-					newPosts.forEach((np) => {
-						if (np.uid === d.uid) {
-							np.upVote = d.upVote;
-							np.downVote = d.downVote;
-						}
+
+				if(data>0){
+					const newPosts = _.cloneDeep(posts);
+					//@ts-ignore
+					data.forEach((d) => {
+						newPosts.forEach((np) => {
+							if (np.uid === d.uid) {
+								np.upVote = d.upVote;
+								np.downVote = d.downVote;
+							}
+						});
 					});
-				});
-				setPosts(newPosts);
+					setPosts(newPosts);
+				}
+
 			});
 		}
 	}, [posts]);

@@ -46,20 +46,23 @@ const PostPage: NextPage<{ post: Post; initialComments: Comment[] }> = ({ post, 
             socket.emit('subscribe',comments.map(p=>p.uid).concat([postState.uid]))
             socket.off('votes')
             socket.on('votes',(data:any)=>{
-                console.log(data)
-                const newComments=_.cloneDeep(comments);
-                //@ts-ignore
-                data.forEach(d=>{
-					if(d.uid===post.uid){
-						postState.upVote=d.upVote;
-						postState.downVote=d.downVote;
-						setPost(postState);
-					}
-                    newComments.forEach(np=>{
-                        if(np.uid===d.uid) {np.upVote=d.upVote; np.downVote=d.downVote};
-                    })
-				})
-                setComments(newComments);
+
+				if(data.length>0){
+					const newComments=_.cloneDeep(comments);
+					//@ts-ignore
+					data.forEach(d=>{
+						if(d.uid===post.uid){
+							postState.upVote=d.upVote;
+							postState.downVote=d.downVote;
+							setPost(postState);
+						}
+						newComments.forEach(np=>{
+							if(np.uid===d.uid) {np.upVote=d.upVote; np.downVote=d.downVote};
+						})
+					})
+					setComments(newComments);
+				}
+
             })
         }
 	},[comments]);

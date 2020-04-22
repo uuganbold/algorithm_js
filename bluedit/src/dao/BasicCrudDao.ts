@@ -50,6 +50,7 @@ abstract class BasicCrudDao<T extends BaseEntity> extends BaseDao implements Cru
      * @param uid uid of the user to be found
      */
     public async findOne(uid:string):Promise<T>{
+        
         let entity:T=null;
         const userRef=this.db.collection(this.COLLECTION_NAME).doc(uid);
         entity=(await userRef.get()).data() as T;
