@@ -29,6 +29,7 @@ export class PostService {
         post.subbluedit=subdit;
         post.user=user;
         post.post_date=new Date();
+        post.comment=0;
         post.upVote=0;
         post.downVote=0;
         return await this.dao.save(post);
