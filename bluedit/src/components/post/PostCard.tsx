@@ -17,7 +17,10 @@ type Props = {
 	sendVote:(post:Post,v:Vote)=>void
 };
 
-const PostCard: FunctionComponent<Props> = ({ post,commentCount,voteDirection,sendVote}) => {
+const PostCard: FunctionComponent<Props> = ({ post, commentCount, voteDirection, sendVote }) => {
+
+	const voteButtonUp = `up voteButton`;
+	const voteButtonDown = `down voteButton`;
 	const {profile}=useContext(UserContext)
 	
 	const upVote=()=>{
@@ -34,11 +37,11 @@ const PostCard: FunctionComponent<Props> = ({ post,commentCount,voteDirection,se
 	return (
 		<Card className={styles.post}>
 			<CardHeader>
-				<Button color="secondary" className={classNames(styles.voteButton,voteDirection===VoteDirection.UP?styles.active:'')}  onClick={upVote}>
+				<Button color="secondary" className={classNames(styles.voteButtonUp,voteDirection===VoteDirection.UP?styles.active:'')}  onClick={upVote}>
 					<FontAwesomeIcon icon={faArrowUp}/>
 				</Button>
 				<span>{post.upVote-post.downVote}</span>
-				<Button color="secondary" className={classNames(styles.voteButton,voteDirection===VoteDirection.DOWN?styles.active:'')} onClick={downVote}>
+				<Button color="secondary" className={classNames(styles.voteButtonDown,voteDirection===VoteDirection.DOWN?styles.active:'')} onClick={downVote}>
 					<FontAwesomeIcon icon={faArrowDown} />
 				</Button>
 			</CardHeader>

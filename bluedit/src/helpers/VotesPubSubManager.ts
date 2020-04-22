@@ -9,7 +9,7 @@ export default class VotesPubSubManager {
     constructor() {
         this.subscribers=new Map();
         this.objects=new Map();
-        this.brokerId = setInterval(() => { this.broker() }, 1000);
+        this.brokerId = global.setInterval(() => { this.broker() }, 1000);
     }
     subscribe(subscriber:SocketIO.Socket, objectsToSubscribe:[]) {
         this.subscribers.set(subscriber.id,{subscriber:subscriber,obj:objectsToSubscribe});
